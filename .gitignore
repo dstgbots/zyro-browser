@@ -1,0 +1,30 @@
+.DS_Store
+
+# Build directories
+chromium/
+depot_tools/
+out/
+build/
+titanium/
+
+# Extensions built output
+extensions/dist/
+
+# Keys and credentials
+keys/
+local.properties
+*.jks
+*.keystore
+*.pem
+google-services.json
+
+# IDE and OS files
+.idea/
+*.iml
+.vscode/
+
+# Build artifacts
+*.aab
+*.apk
+*.dex
+*.class

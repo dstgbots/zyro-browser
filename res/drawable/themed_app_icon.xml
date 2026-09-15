@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Zyro Browser: Monochrome adaptive icon for Android 13+ dynamic theming.
+     Displays a bold "Z" lettermark that works as a single-color silhouette. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="90dp"
+    android:height="90dp"
+    android:viewportWidth="90"
+    android:viewportHeight="90">
+    <!-- Bold "Z" lettermark path -->
+    <path
+        android:pathData="
+          M18,18 L72,18 L72,28 L38,62 L72,62 L72,72 L18,72 L18,62 L52,28 L18,28 Z"
+        android:fillColor="#000000"/>
+</vector>
