@@ -14,12 +14,22 @@ set_keys() {
 }
 
 sign_apk() {
+    if [ ! -s "$SCRIPT_DIR/keys/local.properties" ]; then
+        echo "No signing keys found, copying unsigned/debug APK directly..."
+        cp "$1" "$2"
+        return 0
+    fi
     export apksigner=$(find $ANDROID_HOME/build-tools -name apksigner | sort | tail -n 1)
     source $SCRIPT_DIR/keys/local.properties
     $apksigner sign -verbose -ks $SCRIPT_DIR/keys/test.jks --ks-pass pass:$storePassword --key-pass pass:$keyPassword --ks-key-alias $keyAlias --out $2 $1 || exit 1
 }
 
 sign_aab() {
+    if [ ! -s "$SCRIPT_DIR/keys/local.properties" ]; then
+        echo "No signing keys found, copying unsigned/debug AAB directly..."
+        cp "$1" "$2"
+        return 0
+    fi
     source $SCRIPT_DIR/keys/local.properties
     jarsigner -verbose -sigalg SHA256withRSA -digestalg SHA-256 -keystore $SCRIPT_DIR/keys/test.jks -storepass $storePassword -keypass $keyPassword -signedjar $2 $1 $keyAlias || exit 1
 }
