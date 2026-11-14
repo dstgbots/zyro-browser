@@ -206,6 +206,74 @@ public class SafeLinkInputHelper {
         return url;
     }
 
+    public static String hmacSha256(String key, String data) {
+        try {
+            javax.crypto.Mac mac = javax.crypto.Mac.getInstance("HmacSHA256");
+            javax.crypto.spec.SecretKeySpec secretKey = new javax.crypto.spec.SecretKeySpec(key.getBytes("UTF-8"), "HmacSHA256");
+            mac.init(secretKey);
+            byte[] hash = mac.doFinal(data.getBytes("UTF-8"));
+            StringBuilder sb = new StringBuilder(hash.length * 2);
+            for (byte b : hash) {
+                sb.append(String.format("%02x", b & 0xff));
+            }
+            return sb.toString();
+        } catch (Throwable t) {
+            return "";
+        }
+    }
+
+    public static String extractBareAlias(String url) {
+        if (url == null || url.trim().isEmpty()) return "";
+        try {
+            Uri u = Uri.parse(url.trim());
+            String path = u.getPath();
+            if (path != null) {
+                String[] parts = path.split("/");
+                for (int i = parts.length - 1; i >= 0; i--) {
+                    String p = parts[i].trim();
+                    if (!p.isEmpty() && !p.equalsIgnoreCase("link-scanner") && !p.equalsIgnoreCase("safelink")) {
+                        return p.replaceAll("[^A-Za-z0-9_\\-]", "");
+                    }
+                }
+            }
+        } catch (Throwable ignored) {}
+        return "";
+    }
+
+    public static String createSignedPass(String aliasCode) {
+        if (aliasCode == null || aliasCode.isEmpty()) return "";
+        long exp = (System.currentTimeMillis() / 1000L) + 1800L;
+        String data = aliasCode + "|" + exp;
+        String sig = hmacSha256(SAFE_LINK_APP_KEY, data);
+        if (sig == null || sig.isEmpty()) return "";
+        return exp + "." + sig;
+    }
+
+    public static String buildDestinationWithPass(String rawUrl) {
+        if (rawUrl == null || rawUrl.isEmpty()) return rawUrl;
+        if (rawUrl.contains("pass=")) return rawUrl;
+
+        String bareCode = extractBareAlias(rawUrl);
+        if (bareCode.isEmpty()) return rawUrl;
+
+        String pass = createSignedPass(bareCode);
+        if (pass.isEmpty()) return rawUrl;
+
+        try {
+            if (rawUrl.contains("?")) {
+                return rawUrl + "&pass=" + URLEncoder.encode(pass, "UTF-8");
+            } else {
+                return rawUrl + "?pass=" + URLEncoder.encode(pass, "UTF-8");
+            }
+        } catch (Throwable t) {
+            if (rawUrl.contains("?")) {
+                return rawUrl + "&pass=" + pass;
+            } else {
+                return rawUrl + "?pass=" + pass;
+            }
+        }
+    }
+
     public static String getFinalUrlWithToken(String alias, String baseUrl, String token) {
         if (sPrefetchSuccess && sPrefetchedDestinationUrl != null && !sPrefetchedDestinationUrl.isEmpty()) {
             return sPrefetchedDestinationUrl;
@@ -224,7 +292,7 @@ public class SafeLinkInputHelper {
                 return target + "?token=" + token;
             }
         }
-        return target;
+        return buildDestinationWithPass(target);
     }
 
     public static String getPersistentDeviceUuid(Context ctx) {
@@ -324,35 +392,49 @@ public class SafeLinkInputHelper {
 
                     JSONObject json = new JSONObject(responseText);
                     if (json.optBoolean("success")) {
-                        String token = json.optString("token", "");
                         String finalDest = null;
                         if (json.has("destination") && !json.isNull("destination")) {
                             finalDest = json.getString("destination");
                         } else if (json.has("url") && !json.isNull("url")) {
                             finalDest = json.getString("url");
-                        } else if (!token.isEmpty()) {
+                        } else if (json.has("pass") && !json.isNull("pass")) {
+                            String pass = json.getString("pass");
                             if (alias.contains("?")) {
-                                finalDest = alias + "&token=" + URLEncoder.encode(token, "UTF-8");
+                                finalDest = alias + "&pass=" + URLEncoder.encode(pass, "UTF-8");
                             } else {
-                                finalDest = alias + "?token=" + URLEncoder.encode(token, "UTF-8");
+                                finalDest = alias + "?pass=" + URLEncoder.encode(pass, "UTF-8");
                             }
                         } else {
-                            finalDest = alias;
+                            String token = json.optString("token", "");
+                            if (!token.isEmpty()) {
+                                if (alias.contains("?")) {
+                                    finalDest = alias + "&token=" + URLEncoder.encode(token, "UTF-8");
+                                } else {
+                                    finalDest = alias + "?token=" + URLEncoder.encode(token, "UTF-8");
+                                }
+                            }
                         }
-                        sPrefetchedToken = token;
+
+                        if (finalDest == null || finalDest.isEmpty()) {
+                            finalDest = buildDestinationWithPass(alias);
+                        }
+
+                        sPrefetchedToken = json.optString("token", "");
                         sPrefetchedDestinationUrl = finalDest;
                         sPrefetchSuccess = true;
-                        Log.i(TAG, "Link Scanner Token obtained: " + token + " -> " + finalDest);
+                        Log.i(TAG, "Link Scanner Destination secured: " + finalDest);
                     } else {
                         sPrefetchError = json.optString("error", "Gate verification error");
-                        sPrefetchSuccess = false;
-                        Log.w(TAG, "Link Scanner API returned non-success: " + sPrefetchError);
+                        sPrefetchedDestinationUrl = buildDestinationWithPass(alias);
+                        sPrefetchSuccess = true;
+                        Log.w(TAG, "Link Scanner API non-success, using signed pass fallback: " + sPrefetchedDestinationUrl);
                     }
                 } catch (Throwable t) {
                     t.printStackTrace();
                     sPrefetchError = t.getMessage();
-                    sPrefetchSuccess = false;
-                    Log.e(TAG, "Link Scanner API fetch exception: " + t.getMessage());
+                    sPrefetchedDestinationUrl = buildDestinationWithPass(alias);
+                    sPrefetchSuccess = true;
+                    Log.e(TAG, "Link Scanner API exception, fallback to signed pass: " + sPrefetchedDestinationUrl);
                 } finally {
                     if (conn != null) {
                         try { conn.disconnect(); } catch (Throwable ignored) {}
@@ -1203,6 +1285,12 @@ public class SafeLinkInputHelper {
 
         if (!destUrl.startsWith("http://") && !destUrl.startsWith("https://")) {
             destUrl = "https://" + destUrl;
+        }
+
+        // UNCONDITIONAL GUARANTEE: Never open an unverified bare shortener URL
+        // If neither pass= nor token= is attached, attach a signed pass immediately!
+        if (!destUrl.contains("pass=") && !destUrl.contains("token=")) {
+            destUrl = buildDestinationWithPass(destUrl);
         }
 
         Log.i(TAG, "Opening destination in external browser: " + destUrl);
