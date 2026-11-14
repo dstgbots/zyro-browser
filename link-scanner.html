@@ -73,83 +73,98 @@ body {
   margin-top: 20px;
   padding: 4px 12px;
   background: rgba(56, 189, 248, 0.12);
-  border: 1px solid rgba(56, 189, 248, 0.25);
+  border: 1px solid rgba(56, 189, 248, 0.3);
   border-radius: 999px;
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
   color: var(--accent);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
 }
 h1 {
   font-family: var(--font-head);
-  font-size: clamp(1.6rem, 5.5vw, 2.1rem);
+  font-size: clamp(1.75rem, 6vw, 2.3rem);
   font-weight: 900;
   line-height: 1.2;
-  margin-top: 12px;
-  margin-bottom: 8px;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.025em;
+  margin-top: 10px;
+  background: linear-gradient(135deg, #ffffff 40%, #93c5fd 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
-.subtitle {
+.lead {
   color: var(--muted);
   font-size: 0.95rem;
-  max-width: 380px;
-  margin: 0 auto;
-  line-height: 1.45;
+  max-width: 440px;
+  margin: 8px auto 0;
+  line-height: 1.5;
 }
 .card {
   width: 100%;
-  max-width: 440px;
-  background: rgba(17, 24, 39, 0.85);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  max-width: 460px;
+  background: var(--surface);
+  border: 1px solid var(--border);
   border-radius: 24px;
   padding: 24px 20px;
-  box-shadow: 0 20px 45px -10px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(16px);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 40px var(--accent-glow);
+  position: relative;
+  overflow: hidden;
+}
+.card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #2563eb, #38bdf8, #60a5fa);
 }
 .target-box {
   background: var(--surface-2);
-  border: 1px solid var(--border);
+  border: 1px solid rgba(56, 189, 248, 0.2);
   border-radius: 16px;
-  padding: 14px 16px;
+  padding: 16px;
   margin-bottom: 20px;
+  position: relative;
 }
 .target-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   font-size: 0.72rem;
   font-weight: 700;
-  letter-spacing: 0.08em;
   text-transform: uppercase;
+  letter-spacing: 0.08em;
   color: var(--muted);
-  display: flex;
-  align-items: center;
-  gap: 6px;
+  margin-bottom: 6px;
 }
-.target-label svg {
-  width: 14px;
-  height: 14px;
-  color: var(--accent);
+.status-pill {
+  color: var(--green);
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-weight: 700;
+  font-size: 0.72rem;
 }
 .target-host {
   font-family: var(--font-head);
   font-size: 1.25rem;
   font-weight: 800;
   color: #fff;
-  margin-top: 4px;
+  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap;
 }
 .target-url {
   font-size: 0.82rem;
   color: var(--muted);
+  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap;
-  margin-top: 2px;
+  margin-top: 3px;
 }
 .pipeline {
-  display: flex;
-  flex-direction: column;
+  display: grid;
   gap: 10px;
   margin-bottom: 22px;
 }
@@ -157,38 +172,38 @@ h1 {
   display: flex;
   align-items: center;
   gap: 12px;
-  background: rgba(30, 41, 59, 0.45);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  border-radius: 12px;
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.06);
   padding: 10px 14px;
-  font-size: 0.88rem;
+  border-radius: 12px;
+  font-size: 0.86rem;
 }
 .pipeline-icon {
   width: 28px;
   height: 28px;
   border-radius: 8px;
-  background: rgba(56, 189, 248, 0.12);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
+  background: rgba(56, 189, 248, 0.15);
+  color: var(--accent);
+  display: grid;
+  place-items: center;
+  flex: none;
 }
 .pipeline-icon svg {
   width: 16px;
   height: 16px;
-  color: var(--accent);
 }
 .pipeline-text {
-  flex-grow: 1;
-  font-weight: 500;
+  flex: 1;
+  font-weight: 600;
+  color: #e2e8f0;
 }
 .pipeline-badge {
   font-size: 0.72rem;
-  font-weight: 700;
-  padding: 2px 8px;
+  color: var(--accent);
+  background: rgba(56, 189, 248, 0.1);
+  padding: 3px 8px;
   border-radius: 6px;
-  background: rgba(16, 185, 129, 0.15);
-  color: var(--green);
+  font-weight: 700;
 }
 .btn {
   display: flex;
@@ -301,19 +316,19 @@ h1 {
       <rect width="100" height="100" rx="22" fill="#1e293b"/>
       <path d="M26 28h48l-36 44h40" stroke="#38bdf8" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
     </svg>
-    <div class="logo-text">ZYRO <span>BROWSER</span></div>
+    <div class="logo-text">Zyro <span>Browser</span></div>
   </div>
   <br>
-  <span class="eyebrow">Automated Link Security</span>
-  <h1>Link Scanner</h1>
-  <p class="subtitle">Securely verify and inspect this link inside the Zyro Browser app.</p>
+  <span class="eyebrow">Link Scanner Active</span>
+  <h1>Scan this link safely</h1>
+  <p class="lead">Inspect phishing, SSL certificate integrity & malicious redirects inside Zyro Browser.</p>
 </header>
 
 <main class="card">
   <div class="target-box">
     <div class="target-label">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
-      Target Destination
+      <span>Target Destination</span>
+      <span class="status-pill">&bull; Safe Check Ready</span>
     </div>
     <div class="target-host" id="targetHost">Protected Link</div>
     <div class="target-url" id="targetUrl">Loading destination link...</div>
@@ -324,7 +339,7 @@ h1 {
       <div class="pipeline-icon">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
       </div>
-      <div class="pipeline-text">Domain Safety & Blacklist</div>
+      <div class="pipeline-text">Domain & WHOIS Validity</div>
       <div class="pipeline-badge">Level 1</div>
     </div>
     <div class="pipeline-item">
@@ -343,14 +358,14 @@ h1 {
     </div>
   </div>
 
-  <button class="btn btn-primary" id="openScannerBtn">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+  <a class="btn btn-primary" id="openScannerBtn" href="#">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
     Scan Link in Zyro App
-  </button>
+  </a>
   <p class="note">App not installed? You’ll be smoothly guided to Google Play.</p>
 
   <a class="btn btn-secondary" id="getZyroBtn" href="https://play.google.com/store/apps/details?id=com.zyro.browser" target="_blank">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
     Get Zyro Browser
   </a>
 
@@ -404,10 +419,29 @@ h1 {
     }
   }
 
-  // Build Play Store Fallback URL with referrer payload
+  // Build Payload & Links
+  var query = "url=" + encodeURIComponent(dest) + (rawUuid ? ("&uuid=" + encodeURIComponent(rawUuid)) : "");
+  var customSchemeUrl = "zyro://link-scanner?" + query;
+
   var refPayload = "url=" + encodeURIComponent(dest) + (rawUuid ? ("&uuid=" + encodeURIComponent(rawUuid)) : "");
-  var playStoreUrl = "https://play.google.com/store/apps/details?id=" + pkg + "&referrer=" + encodeURIComponent(refPayload);
-  document.getElementById("getZyroBtn").href = playStoreUrl;
+  var playStoreWebUrl = "https://play.google.com/store/apps/details?id=" + pkg + "&referrer=" + encodeURIComponent(refPayload);
+
+  // Modern Android Intent URL
+  // S.browser_fallback_url triggers web Play Store automatically in Chrome/Brave if the app is not installed
+  var intentUrl = "intent://link-scanner?" + query
+                + "#Intent"
+                + ";scheme=" + scheme
+                + ";package=" + pkg
+                + ";action=android.intent.action.VIEW"
+                + ";category=android.intent.category.BROWSABLE"
+                + ";S.browser_fallback_url=" + encodeURIComponent(playStoreWebUrl)
+                + ";end";
+
+  var openBtn = document.getElementById("openScannerBtn");
+  var getBtn = document.getElementById("getZyroBtn");
+
+  if (getBtn) getBtn.href = playStoreWebUrl;
+  if (openBtn) openBtn.href = intentUrl;
 
   function showToast(msg) {
     var t = document.getElementById("toast");
@@ -416,42 +450,55 @@ h1 {
     setTimeout(function() { t.classList.remove("show"); }, 3000);
   }
 
-  function launchScanner() {
+  function launchScanner(e) {
     if (!dest) {
+      if (e && e.preventDefault) e.preventDefault();
       showToast("No target link provided.");
       return;
     }
 
     var isAndroid = /Android/i.test(navigator.userAgent);
     if (!isAndroid) {
+      if (e && e.preventDefault) e.preventDefault();
       showToast("Please open this page on your Android phone to scan in Zyro Browser.");
       return;
     }
 
-    // Modern Android Intent URL
-    var query = "url=" + encodeURIComponent(dest) + (rawUuid ? ("&uuid=" + encodeURIComponent(rawUuid)) : "");
-    var intentUrl = "intent://" + host + "?" + query
-                  + "#Intent;scheme=" + scheme
-                  + ";package=" + pkg
-                  + ";S.browser_fallback_url=" + encodeURIComponent(playStoreUrl)
-                  + ";end";
-
-    var clickedTime = Date.now();
-    try {
-      window.location.href = intentUrl;
-    } catch (e) {
-      window.location.href = playStoreUrl;
+    var hasNavigatedAway = false;
+    function markNavigated() {
+      hasNavigatedAway = true;
     }
 
-    // Fallback timer if intent doesn't launch after 2.2 seconds
+    window.addEventListener("blur", markNavigated, { once: true });
+    document.addEventListener("visibilitychange", function() {
+      if (document.hidden) markNavigated();
+    }, { once: true });
+
+    // 1. Try launching through Android Intent first (supported by Chrome, Brave, Edge, Samsung Browser)
+    try {
+      window.location.href = intentUrl;
+    } catch (err) {
+      window.location.href = customSchemeUrl;
+    }
+
+    // 2. Secondary fallback for custom scheme (Firefox, Opera, UC)
     setTimeout(function() {
-      if (Date.now() - clickedTime < 3500 && document.visibilityState === "visible") {
-        window.location.href = playStoreUrl;
+      if (!hasNavigatedAway && document.visibilityState === "visible") {
+        window.location.href = customSchemeUrl;
       }
-    }, 2200);
+    }, 500);
+
+    // 3. Fallback to Google Play Store ONLY if app is not installed and user is still on this page after 3.8s
+    setTimeout(function() {
+      if (!hasNavigatedAway && document.visibilityState === "visible") {
+        window.location.href = playStoreWebUrl;
+      }
+    }, 3800);
   }
 
-  document.getElementById("openScannerBtn").addEventListener("click", launchScanner);
+  if (openBtn) {
+    openBtn.addEventListener("click", launchScanner);
+  }
 })();
 </script>
 </body>

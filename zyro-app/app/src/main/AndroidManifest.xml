@@ -61,13 +61,11 @@
                 <data android:scheme="zyro" android:host="safelink" />
             </intent-filter>
 
-            <!-- App Link for zyrobrowser.com and ezyshort.xyz link-scanner -->
+            <!-- App Link for legacy ezyshort.xyz safelink -->
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="https" android:host="zyrobrowser.com" android:pathPrefix="/link-scanner" />
-                <data android:scheme="http" android:host="zyrobrowser.com" android:pathPrefix="/link-scanner" />
                 <data android:scheme="https" android:host="ezyshort.xyz" android:pathPrefix="/safelink" />
             </intent-filter>
         </activity>

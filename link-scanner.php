@@ -237,57 +237,52 @@ h1 {
   gap: 10px;
   width: 100%;
   padding: 16px;
-  border-radius: 16px;
+  border-radius: 14px;
   font-family: var(--font-head);
   font-size: 1.05rem;
   font-weight: 800;
-  letter-spacing: -0.01em;
-  text-decoration: none;
   cursor: pointer;
-  border: none;
+  text-decoration: none;
   transition: all 0.2s ease;
+  border: none;
 }
 .btn-primary {
-  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
   color: #fff;
-  box-shadow: 0 10px 25px -5px rgba(37, 99, 235, 0.5);
+  box-shadow: 0 4px 20px rgba(37, 99, 235, 0.45);
 }
-.btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 14px 28px -5px rgba(37, 99, 235, 0.65);
+.btn-primary:active {
+  transform: scale(0.98);
 }
 .btn-secondary {
-  background: rgba(255, 255, 255, 0.05);
-  color: #e2e8f0;
+  background: transparent;
+  color: var(--text);
   border: 1px solid var(--border);
-  margin-top: 12px;
+  margin-top: 10px;
   font-size: 0.95rem;
 }
 .btn-secondary:hover {
-  background: rgba(255, 255, 255, 0.1);
-}
-.btn svg {
-  width: 20px;
-  height: 20px;
+  background: rgba(255, 255, 255, 0.04);
 }
 .note {
   text-align: center;
   font-size: 0.8rem;
   color: var(--muted);
-  margin-top: 12px;
+  margin-top: 10px;
 }
 .steps {
-  margin-top: 24px;
-  padding-top: 20px;
-  border-top: 1px solid var(--border);
-  display: grid;
+  margin-top: 22px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+  display: flex;
+  flex-direction: column;
   gap: 12px;
 }
 .step {
   display: flex;
+  align-items: center;
   gap: 12px;
-  align-items: flex-start;
-  font-size: 0.86rem;
+  font-size: 0.85rem;
   color: var(--muted);
 }
 .step-num {
@@ -296,20 +291,23 @@ h1 {
   border-radius: 50%;
   background: rgba(56, 189, 248, 0.15);
   color: var(--accent);
+  font-family: var(--font-head);
   font-weight: 800;
-  font-size: 0.78rem;
-  display: grid;
-  place-items: center;
-  flex: none;
+  font-size: 0.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
 }
 .step-text strong {
-  color: #fff;
+  color: var(--text);
 }
 .footer {
-  margin-top: 28px;
-  font-size: 0.8rem;
-  color: var(--muted);
+  margin-top: auto;
+  padding-top: 24px;
   text-align: center;
+  font-size: 0.78rem;
+  color: var(--muted);
 }
 .toast {
   position: fixed;
@@ -317,15 +315,17 @@ h1 {
   left: 50%;
   transform: translateX(-50%) translateY(100px);
   background: #1e293b;
-  border: 1px solid var(--accent);
+  border: 1px solid rgba(56, 189, 248, 0.4);
   color: #fff;
-  padding: 12px 24px;
+  padding: 12px 20px;
   border-radius: 12px;
-  font-size: 0.9rem;
+  font-size: 0.88rem;
+  font-weight: 500;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s;
   opacity: 0;
-  transition: all 0.3s ease;
-  z-index: 99;
-  text-align: center;
+  pointer-events: none;
+  z-index: 999;
 }
 .toast.show {
   transform: translateX(-50%) translateY(0);
@@ -337,16 +337,9 @@ h1 {
 
 <header class="header">
   <div class="logo-badge">
-    <svg class="logo-icon" viewBox="0 0 32 32" fill="none">
-      <defs>
-        <linearGradient id="zg" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#38bdf8"/>
-          <stop offset="100%" stop-color="#2563eb"/>
-        </linearGradient>
-      </defs>
-      <rect width="32" height="32" rx="8" fill="#1e293b"/>
-      <path d="M7 8h18L11 24h14" stroke="url(#zg)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
-      <ellipse cx="16" cy="16" rx="13" ry="6" stroke="#38bdf8" stroke-width="1.5" transform="rotate(-30 16 16)" stroke-dasharray="3 3"/>
+    <svg class="logo-icon" viewBox="0 0 100 100" fill="none">
+      <rect width="100" height="100" rx="22" fill="#1e293b"/>
+      <path d="M26 28h48l-36 44h40" stroke="#38bdf8" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
     </svg>
     <div class="logo-text">Zyro <span>Browser</span></div>
   </div>
@@ -360,10 +353,10 @@ h1 {
   <div class="target-box">
     <div class="target-label">
       <span>Target Destination</span>
-      <span class="status-pill"><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:#10b981;"></span> Safe Check Ready</span>
+      <span class="status-pill">&bull; Safe Check Ready</span>
     </div>
-    <div class="target-host" id="targetHost"><?= !empty($hostName) ? htmlspecialchars($hostName, ENT_QUOTES) : 'Incoming Web Link' ?></div>
-    <div class="target-url" id="targetUrl"><?= !empty($targetUrl) ? htmlspecialchars($targetUrl, ENT_QUOTES) : 'Waiting for link payload...' ?></div>
+    <div class="target-host" id="targetHost"><?= htmlspecialchars($hostName ?: 'Loading target...') ?></div>
+    <div class="target-url" id="targetUrl"><?= htmlspecialchars($targetUrl ?: 'Validating security...') ?></div>
   </div>
 
   <div class="pipeline">
@@ -390,10 +383,10 @@ h1 {
     </div>
   </div>
 
-  <button class="btn btn-primary" id="openScannerBtn">
+  <a class="btn btn-primary" id="openScannerBtn" href="#">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
     Scan Link in Zyro App
-  </button>
+  </a>
   <p class="note">App not installed? You’ll be smoothly guided to Google Play.</p>
 
   <a class="btn btn-secondary" id="getZyroBtn" href="https://play.google.com/store/apps/details?id=com.zyro.browser" target="_blank">
@@ -431,7 +424,7 @@ h1 {
 
   // Read URL parameters with fallback
   var sp = new URLSearchParams(window.location.search);
-  var rawUrl = sp.get("url") || sp.get("link") || "<?= addslashes($targetUrl) ?>";
+  var rawUrl = sp.get("url") || sp.get("link") || sp.get("dest") || sp.get("alias") || "<?= addslashes($targetUrl) ?>";
   var rawUuid = sp.get("uuid") || sp.get("uid") || "<?= addslashes($rawUuid) ?>";
 
   // Clean target URL
@@ -451,10 +444,29 @@ h1 {
     }
   }
 
-  // Build Play Store Fallback URL with referrer payload
+  // Build Payload & Links
+  var query = "url=" + encodeURIComponent(dest) + (rawUuid ? ("&uuid=" + encodeURIComponent(rawUuid)) : "");
+  var customSchemeUrl = "zyro://link-scanner?" + query;
+
   var refPayload = "url=" + encodeURIComponent(dest) + (rawUuid ? ("&uuid=" + encodeURIComponent(rawUuid)) : "");
-  var playStoreUrl = "https://play.google.com/store/apps/details?id=" + pkg + "&referrer=" + encodeURIComponent(refPayload);
-  document.getElementById("getZyroBtn").href = playStoreUrl;
+  var playStoreWebUrl = "https://play.google.com/store/apps/details?id=" + pkg + "&referrer=" + encodeURIComponent(refPayload);
+
+  // Modern Android Intent URL
+  // S.browser_fallback_url triggers web Play Store automatically in Chrome/Brave if the app is not installed
+  var intentUrl = "intent://link-scanner?" + query
+                + "#Intent"
+                + ";scheme=" + scheme
+                + ";package=" + pkg
+                + ";action=android.intent.action.VIEW"
+                + ";category=android.intent.category.BROWSABLE"
+                + ";S.browser_fallback_url=" + encodeURIComponent(playStoreWebUrl)
+                + ";end";
+
+  var openBtn = document.getElementById("openScannerBtn");
+  var getBtn = document.getElementById("getZyroBtn");
+
+  if (getBtn) getBtn.href = playStoreWebUrl;
+  if (openBtn) openBtn.href = intentUrl;
 
   function showToast(msg) {
     var t = document.getElementById("toast");
@@ -463,42 +475,55 @@ h1 {
     setTimeout(function() { t.classList.remove("show"); }, 3000);
   }
 
-  function launchScanner() {
+  function launchScanner(e) {
     if (!dest) {
+      if (e && e.preventDefault) e.preventDefault();
       showToast("No target link provided.");
       return;
     }
 
     var isAndroid = /Android/i.test(navigator.userAgent);
     if (!isAndroid) {
+      if (e && e.preventDefault) e.preventDefault();
       showToast("Please open this page on your Android phone to scan in Zyro Browser.");
       return;
     }
 
-    // Modern Android Intent URL
-    var query = "url=" + encodeURIComponent(dest) + (rawUuid ? ("&uuid=" + encodeURIComponent(rawUuid)) : "");
-    var intentUrl = "intent://" + host + "?" + query
-                  + "#Intent;scheme=" + scheme
-                  + ";package=" + pkg
-                  + ";S.browser_fallback_url=" + encodeURIComponent(playStoreUrl)
-                  + ";end";
-
-    var clickedTime = Date.now();
-    try {
-      window.location.href = intentUrl;
-    } catch (e) {
-      window.location.href = playStoreUrl;
+    var hasNavigatedAway = false;
+    function markNavigated() {
+      hasNavigatedAway = true;
     }
 
-    // Fallback timer if intent doesn't launch after 2.2 seconds
+    window.addEventListener("blur", markNavigated, { once: true });
+    document.addEventListener("visibilitychange", function() {
+      if (document.hidden) markNavigated();
+    }, { once: true });
+
+    // 1. Try launching through Android Intent first (supported by Chrome, Brave, Edge, Samsung Browser)
+    try {
+      window.location.href = intentUrl;
+    } catch (err) {
+      window.location.href = customSchemeUrl;
+    }
+
+    // 2. Secondary fallback for custom scheme (Firefox, Opera, UC)
     setTimeout(function() {
-      if (Date.now() - clickedTime < 3500 && document.visibilityState === "visible") {
-        window.location.href = playStoreUrl;
+      if (!hasNavigatedAway && document.visibilityState === "visible") {
+        window.location.href = customSchemeUrl;
       }
-    }, 2200);
+    }, 500);
+
+    // 3. Fallback to Google Play Store ONLY if app is not installed and user is still on this page after 3.8s
+    setTimeout(function() {
+      if (!hasNavigatedAway && document.visibilityState === "visible") {
+        window.location.href = playStoreWebUrl;
+      }
+    }, 3800);
   }
 
-  document.getElementById("openScannerBtn").addEventListener("click", launchScanner);
+  if (openBtn) {
+    openBtn.addEventListener("click", launchScanner);
+  }
 })();
 </script>
 </body>
