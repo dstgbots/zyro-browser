@@ -419,22 +419,23 @@ h1 {
     }
   }
 
-  // Build Payload & Links
+  // Build Payload & Direct App Intent
   var query = "url=" + encodeURIComponent(dest) + (rawUuid ? ("&uuid=" + encodeURIComponent(rawUuid)) : "");
   var customSchemeUrl = "zyro://link-scanner?" + query;
 
   var refPayload = "url=" + encodeURIComponent(dest) + (rawUuid ? ("&uuid=" + encodeURIComponent(rawUuid)) : "");
+  var playStoreMarketUrl = "market://details?id=" + pkg + "&referrer=" + encodeURIComponent(refPayload);
   var playStoreWebUrl = "https://play.google.com/store/apps/details?id=" + pkg + "&referrer=" + encodeURIComponent(refPayload);
 
   // Modern Android Intent URL
-  // S.browser_fallback_url triggers web Play Store automatically in Chrome/Brave if the app is not installed
+  // S.browser_fallback_url uses market:// so ONLY Google Play Store can open it (prevents "Choose activity: Brave / Zyro Browser" popup)
   var intentUrl = "intent://link-scanner?" + query
                 + "#Intent"
                 + ";scheme=" + scheme
                 + ";package=" + pkg
                 + ";action=android.intent.action.VIEW"
                 + ";category=android.intent.category.BROWSABLE"
-                + ";S.browser_fallback_url=" + encodeURIComponent(playStoreWebUrl)
+                + ";S.browser_fallback_url=" + encodeURIComponent(playStoreMarketUrl)
                 + ";end";
 
   var openBtn = document.getElementById("openScannerBtn");
@@ -464,36 +465,13 @@ h1 {
       return;
     }
 
-    var hasNavigatedAway = false;
-    function markNavigated() {
-      hasNavigatedAway = true;
-    }
-
-    window.addEventListener("blur", markNavigated, { once: true });
-    document.addEventListener("visibilitychange", function() {
-      if (document.hidden) markNavigated();
-    }, { once: true });
-
-    // 1. Try launching through Android Intent first (supported by Chrome, Brave, Edge, Samsung Browser)
-    try {
-      window.location.href = intentUrl;
-    } catch (err) {
+    // Modern browsers (Chrome, Brave, Samsung Internet, Edge) handle the intent link directly via href.
+    // Fallback for browsers that don't support intent:// URIs (e.g. Firefox Mobile, Opera Mobile)
+    var isFirefox = /Firefox/i.test(navigator.userAgent);
+    if (isFirefox) {
+      if (e && e.preventDefault) e.preventDefault();
       window.location.href = customSchemeUrl;
     }
-
-    // 2. Secondary fallback for custom scheme (Firefox, Opera, UC)
-    setTimeout(function() {
-      if (!hasNavigatedAway && document.visibilityState === "visible") {
-        window.location.href = customSchemeUrl;
-      }
-    }, 500);
-
-    // 3. Fallback to Google Play Store ONLY if app is not installed and user is still on this page after 3.8s
-    setTimeout(function() {
-      if (!hasNavigatedAway && document.visibilityState === "visible") {
-        window.location.href = playStoreWebUrl;
-      }
-    }, 3800);
   }
 
   if (openBtn) {
