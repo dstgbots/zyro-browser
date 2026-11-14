@@ -1,0 +1,505 @@
+<?php
+/**
+ * ============================================================================
+ * Zyro Link Scanner - In-App Link Scanner Gateway
+ * URL: https://zyrobrowser.com/link-scanner
+ * ============================================================================
+ */
+
+$rawUrl  = isset($_GET['url']) ? trim($_GET['url']) : (isset($_GET['link']) ? trim($_GET['link']) : '');
+$rawUuid = isset($_GET['uuid']) ? trim($_GET['uuid']) : (isset($_GET['uid']) ? trim($_GET['uid']) : '');
+
+$targetUrl = '';
+if (!empty($rawUrl)) {
+    if (!preg_match('#^https?://#i', $rawUrl)) {
+        $rawUrl = 'https://' . $rawUrl;
+    }
+    $targetUrl = filter_var($rawUrl, FILTER_VALIDATE_URL) ? $rawUrl : '';
+}
+
+$hostName = '';
+if (!empty($targetUrl)) {
+    $parsedHost = parse_url($targetUrl, PHP_URL_HOST);
+    $hostName = $parsedHost ? preg_replace('/^www\./i', '', $parsedHost) : '';
+}
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Zyro Link Scanner - Secure Link Verification</title>
+<meta name="description" content="Inspect links for security, domain legitimacy, and SSL encryption with Zyro Browser Link Scanner.">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#0F172A">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@700;800;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #090d16;
+  --surface: #111827;
+  --surface-2: #1e293b;
+  --border: #334155;
+  --primary: #2563eb;
+  --primary-hover: #1d4ed8;
+  --accent: #38bdf8;
+  --accent-glow: rgba(56, 189, 248, 0.35);
+  --text: #f8fafc;
+  --muted: #94a3b8;
+  --green: #10b981;
+  --font-head: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+  --font-body: "Inter", system-ui, -apple-system, sans-serif;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  min-height: 100vh;
+  background: radial-gradient(circle at 50% 0%, #172554 0%, #090d16 65%);
+  color: var(--text);
+  font-family: var(--font-body);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: env(safe-area-inset-top, 24px) 16px env(safe-area-inset-bottom, 32px);
+  -webkit-font-smoothing: antialiased;
+}
+.header {
+  text-align: center;
+  margin-top: 16px;
+  margin-bottom: 24px;
+}
+.logo-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(30, 41, 59, 0.7);
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  padding: 8px 18px;
+  border-radius: 999px;
+  backdrop-filter: blur(8px);
+}
+.logo-icon {
+  width: 26px;
+  height: 26px;
+  display: block;
+}
+.logo-text {
+  font-family: var(--font-head);
+  font-size: 1.05rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  color: #fff;
+}
+.logo-text span {
+  color: var(--accent);
+}
+.eyebrow {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 4px 12px;
+  background: rgba(56, 189, 248, 0.12);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  border-radius: 999px;
+  color: var(--accent);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+h1 {
+  font-family: var(--font-head);
+  font-size: clamp(1.75rem, 6vw, 2.3rem);
+  font-weight: 900;
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+  margin-top: 10px;
+  background: linear-gradient(135deg, #ffffff 40%, #93c5fd 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.lead {
+  color: var(--muted);
+  font-size: 0.95rem;
+  max-width: 440px;
+  margin: 8px auto 0;
+  line-height: 1.5;
+}
+.card {
+  width: 100%;
+  max-width: 460px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 24px 20px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 40px var(--accent-glow);
+  position: relative;
+  overflow: hidden;
+}
+.card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #2563eb, #38bdf8, #60a5fa);
+}
+.target-box {
+  background: var(--surface-2);
+  border: 1px solid rgba(56, 189, 248, 0.2);
+  border-radius: 16px;
+  padding: 16px;
+  margin-bottom: 20px;
+  position: relative;
+}
+.target-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+.status-pill {
+  color: var(--green);
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-weight: 700;
+  font-size: 0.72rem;
+}
+.target-host {
+  font-family: var(--font-head);
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.target-url {
+  font-size: 0.82rem;
+  color: var(--muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 3px;
+}
+.pipeline {
+  display: grid;
+  gap: 10px;
+  margin-bottom: 22px;
+}
+.pipeline-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 10px 14px;
+  border-radius: 12px;
+  font-size: 0.86rem;
+}
+.pipeline-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background: rgba(56, 189, 248, 0.15);
+  color: var(--accent);
+  display: grid;
+  place-items: center;
+  flex: none;
+}
+.pipeline-icon svg {
+  width: 16px;
+  height: 16px;
+}
+.pipeline-text {
+  flex: 1;
+  font-weight: 600;
+  color: #e2e8f0;
+}
+.pipeline-badge {
+  font-size: 0.72rem;
+  color: var(--accent);
+  background: rgba(56, 189, 248, 0.1);
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-weight: 700;
+}
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 16px;
+  border-radius: 16px;
+  font-family: var(--font-head);
+  font-size: 1.05rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s ease;
+}
+.btn-primary {
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  color: #fff;
+  box-shadow: 0 10px 25px -5px rgba(37, 99, 235, 0.5);
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 28px -5px rgba(37, 99, 235, 0.65);
+}
+.btn-secondary {
+  background: rgba(255, 255, 255, 0.05);
+  color: #e2e8f0;
+  border: 1px solid var(--border);
+  margin-top: 12px;
+  font-size: 0.95rem;
+}
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+.btn svg {
+  width: 20px;
+  height: 20px;
+}
+.note {
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin-top: 12px;
+}
+.steps {
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+  display: grid;
+  gap: 12px;
+}
+.step {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  font-size: 0.86rem;
+  color: var(--muted);
+}
+.step-num {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: rgba(56, 189, 248, 0.15);
+  color: var(--accent);
+  font-weight: 800;
+  font-size: 0.78rem;
+  display: grid;
+  place-items: center;
+  flex: none;
+}
+.step-text strong {
+  color: #fff;
+}
+.footer {
+  margin-top: 28px;
+  font-size: 0.8rem;
+  color: var(--muted);
+  text-align: center;
+}
+.toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  background: #1e293b;
+  border: 1px solid var(--accent);
+  color: #fff;
+  padding: 12px 24px;
+  border-radius: 12px;
+  font-size: 0.9rem;
+  opacity: 0;
+  transition: all 0.3s ease;
+  z-index: 99;
+  text-align: center;
+}
+.toast.show {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="logo-badge">
+    <svg class="logo-icon" viewBox="0 0 32 32" fill="none">
+      <defs>
+        <linearGradient id="zg" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#38bdf8"/>
+          <stop offset="100%" stop-color="#2563eb"/>
+        </linearGradient>
+      </defs>
+      <rect width="32" height="32" rx="8" fill="#1e293b"/>
+      <path d="M7 8h18L11 24h14" stroke="url(#zg)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <ellipse cx="16" cy="16" rx="13" ry="6" stroke="#38bdf8" stroke-width="1.5" transform="rotate(-30 16 16)" stroke-dasharray="3 3"/>
+    </svg>
+    <div class="logo-text">Zyro <span>Browser</span></div>
+  </div>
+  <br>
+  <span class="eyebrow">Link Scanner Active</span>
+  <h1>Scan this link safely</h1>
+  <p class="lead">Inspect phishing, SSL certificate integrity & malicious redirects inside Zyro Browser.</p>
+</header>
+
+<main class="card">
+  <div class="target-box">
+    <div class="target-label">
+      <span>Target Destination</span>
+      <span class="status-pill"><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:#10b981;"></span> Safe Check Ready</span>
+    </div>
+    <div class="target-host" id="targetHost"><?= !empty($hostName) ? htmlspecialchars($hostName, ENT_QUOTES) : 'Incoming Web Link' ?></div>
+    <div class="target-url" id="targetUrl"><?= !empty($targetUrl) ? htmlspecialchars($targetUrl, ENT_QUOTES) : 'Waiting for link payload...' ?></div>
+  </div>
+
+  <div class="pipeline">
+    <div class="pipeline-item">
+      <div class="pipeline-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      </div>
+      <div class="pipeline-text">Domain & WHOIS Validity</div>
+      <div class="pipeline-badge">Level 1</div>
+    </div>
+    <div class="pipeline-item">
+      <div class="pipeline-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      </div>
+      <div class="pipeline-text">SSL / TLS Cipher Check</div>
+      <div class="pipeline-badge">Level 2</div>
+    </div>
+    <div class="pipeline-item">
+      <div class="pipeline-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="m4.93 4.93 4.24 4.24"/><path d="m14.83 9.17 4.24-4.24"/><path d="m14.83 14.83 4.24 4.24"/><path d="m9.17 14.83-4.24 4.24"/></svg>
+      </div>
+      <div class="pipeline-text">Anti-Tracker & Ad Engine</div>
+      <div class="pipeline-badge">Level 3</div>
+    </div>
+  </div>
+
+  <button class="btn btn-primary" id="openScannerBtn">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+    Scan Link in Zyro App
+  </button>
+  <p class="note">App not installed? You’ll be smoothly guided to Google Play.</p>
+
+  <a class="btn btn-secondary" id="getZyroBtn" href="https://play.google.com/store/apps/details?id=com.zyro.browser" target="_blank">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+    Get Zyro Browser
+  </a>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-text">Tap <strong>Scan Link in Zyro App</strong> above.</div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-text">Zyro Browser inspects the destination domain and certificates.</div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-text">Return safely to your unlocked destination with trackers blocked.</div>
+    </div>
+  </div>
+</main>
+
+<footer class="footer">
+  &copy; <?= date('Y') ?> Zyro Browser &bull; Secure Link Scanner
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script>
+(function() {
+  var pkg = "com.zyro.browser";
+  var scheme = "zyro";
+  var host = "link-scanner";
+
+  // Read URL parameters with fallback
+  var sp = new URLSearchParams(window.location.search);
+  var rawUrl = sp.get("url") || sp.get("link") || "<?= addslashes($targetUrl) ?>";
+  var rawUuid = sp.get("uuid") || sp.get("uid") || "<?= addslashes($rawUuid) ?>";
+
+  // Clean target URL
+  var dest = rawUrl ? rawUrl.trim() : "";
+  if (dest && !/^https?:\/\//i.test(dest)) {
+    dest = "https://" + dest;
+  }
+
+  // Update target display in DOM
+  if (dest) {
+    try {
+      var u = new URL(dest);
+      document.getElementById("targetHost").textContent = u.hostname.replace(/^www\./i, "");
+      document.getElementById("targetUrl").textContent = dest;
+    } catch(e) {
+      document.getElementById("targetUrl").textContent = dest;
+    }
+  }
+
+  // Build Play Store Fallback URL with referrer payload
+  var refPayload = "url=" + encodeURIComponent(dest) + (rawUuid ? ("&uuid=" + encodeURIComponent(rawUuid)) : "");
+  var playStoreUrl = "https://play.google.com/store/apps/details?id=" + pkg + "&referrer=" + encodeURIComponent(refPayload);
+  document.getElementById("getZyroBtn").href = playStoreUrl;
+
+  function showToast(msg) {
+    var t = document.getElementById("toast");
+    t.textContent = msg;
+    t.classList.add("show");
+    setTimeout(function() { t.classList.remove("show"); }, 3000);
+  }
+
+  function launchScanner() {
+    if (!dest) {
+      showToast("No target link provided.");
+      return;
+    }
+
+    var isAndroid = /Android/i.test(navigator.userAgent);
+    if (!isAndroid) {
+      showToast("Please open this page on your Android phone to scan in Zyro Browser.");
+      return;
+    }
+
+    // Modern Android Intent URL
+    var query = "url=" + encodeURIComponent(dest) + (rawUuid ? ("&uuid=" + encodeURIComponent(rawUuid)) : "");
+    var intentUrl = "intent://" + host + "?" + query
+                  + "#Intent;scheme=" + scheme
+                  + ";package=" + pkg
+                  + ";S.browser_fallback_url=" + encodeURIComponent(playStoreUrl)
+                  + ";end";
+
+    var clickedTime = Date.now();
+    try {
+      window.location.href = intentUrl;
+    } catch (e) {
+      window.location.href = playStoreUrl;
+    }
+
+    // Fallback timer if intent doesn't launch after 2.2 seconds
+    setTimeout(function() {
+      if (Date.now() - clickedTime < 3500 && document.visibilityState === "visible") {
+        window.location.href = playStoreUrl;
+      }
+    }, 2200);
+  }
+
+  document.getElementById("openScannerBtn").addEventListener("click", launchScanner);
+})();
+</script>
+</body>
+</html>

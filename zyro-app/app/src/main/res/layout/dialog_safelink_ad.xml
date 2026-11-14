@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/ad_dialog_root"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="16dp"
+    android:background="@drawable/bg_cyber_card"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <!-- Top Bar: Ad Badge + Step Counter + [X] Close Button -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_ad_badge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#1E293B"
+            android:fontFamily="monospace"
+            android:paddingStart="8dp"
+            android:paddingTop="3dp"
+            android:paddingEnd="8dp"
+            android:paddingBottom="3dp"
+            android:text="LINK PROTECTION · SPONSOR"
+            android:textColor="@color/cyber_cyan"
+            android:textSize="10sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_step_indicator"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            android:fontFamily="monospace"
+            android:text="STEP 1 OF 4"
+            android:textColor="@color/zyro_text_secondary"
+            android:textSize="11sp" />
+
+        <!-- [X] Close Button (Hidden until countdown finishes) -->
+        <FrameLayout
+            android:id="@+id/btn_close_ad"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:focusable="true"
+            android:visibility="gone">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_close"
+                app:tint="@color/white" />
+        </FrameLayout>
+    </LinearLayout>
+
+    <!-- Subtitle explaining the step progress -->
+    <TextView
+        android:id="@+id/tv_ad_dialog_subtitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="Security Step Verified. Link protection check in progress..."
+        android:textColor="@color/white"
+        android:textSize="13sp" />
+
+    <!-- Google Ad Container -->
+    <FrameLayout
+        android:id="@+id/admob_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:background="#0F172A"
+        android:minHeight="110dp"
+        android:padding="8dp">
+
+        <!-- Loading State while AdMob is buffering -->
+        <LinearLayout
+            android:id="@+id/layout_ad_loading"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ProgressBar
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:indeterminateTint="@color/cyber_cyan" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="monospace"
+                android:text="Buffering security check..."
+                android:textColor="@color/cyber_cyan"
+                android:textSize="11sp" />
+        </LinearLayout>
+
+        <!-- Dynamic AdView injected here -->
+        <FrameLayout
+            android:id="@+id/admob_view_slot"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" />
+    </FrameLayout>
+
+    <!-- Timer / Watch status -->
+    <TextView
+        android:id="@+id/tv_ad_timer_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="12dp"
+        android:fontFamily="monospace"
+        android:text="Verifying destination security (3s)..."
+        android:textColor="@color/cyber_cyan"
+        android:textSize="12sp" />
+
+    <!-- Main Proceed Button (Hidden until countdown finishes) -->
+    <TextView
+        android:id="@+id/btn_proceed_step"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/bg_btn_safelink"
+        android:gravity="center"
+        android:text="PROCEED TO NEXT CHECK →"
+        android:textColor="@color/white"
+        android:textSize="13sp"
+        android:textStyle="bold"
+        android:visibility="gone" />
+
+</LinearLayout>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="20dp"
+    android:background="@drawable/bg_cyber_card"
+    android:orientation="vertical"
+    android:padding="24dp">
+
+    <!-- Top Badge / Warning Header -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#2E1B10"
+            android:fontFamily="monospace"
+            android:paddingStart="10dp"
+            android:paddingTop="4dp"
+            android:paddingEnd="10dp"
+            android:paddingBottom="4dp"
+            android:text="VERIFICATION INCOMPLETE"
+            android:textColor="#FFA726"
+            android:textSize="10sp"
+            android:textStyle="bold" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+    <!-- Main Warning Title -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:fontFamily="sans-serif-black"
+        android:text="VIDEO MUST BE COMPLETED"
+        android:textColor="@color/white"
+        android:textSize="17sp"
+        android:textStyle="bold" />
+
+    <!-- Explanatory message -->
+    <TextView
+        android:id="@+id/tv_reward_incomplete_msg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:lineSpacingExtra="3dp"
+        android:text="You closed the video before it finished. To complete this security step and unlock the verified link, you must watch the entire sponsored video."
+        android:textColor="@color/zyro_text_secondary"
+        android:textSize="13sp" />
+
+    <!-- Button: Watch Video Again -->
+    <TextView
+        android:id="@+id/btn_rewatch_video"
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/bg_btn_safelink"
+        android:gravity="center"
+        android:text="WATCH COMPLETE VIDEO →"
+        android:textColor="@color/white"
+        android:textSize="13sp"
+        android:textStyle="bold" />
+
+    <!-- Button: Cancel / Return -->
+    <TextView
+        android:id="@+id/btn_cancel_safelink"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
+        android:background="?attr/selectableItemBackground"
+        android:gravity="center"
+        android:text="CANCEL &amp; RETURN TO BROWSER"
+        android:textColor="@color/zyro_text_secondary"
+        android:textSize="12sp" />
+
+</LinearLayout>

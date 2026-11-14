@@ -1,0 +1,69 @@
+<resources>
+    <!-- Base App Palette -->
+    <color name="zyro_bg">#18191C</color>
+    <color name="zyro_primary">#18191C</color>
+    <color name="zyro_primary_dark">#101113</color>
+    <color name="zyro_surface">#222428</color>
+    <color name="zyro_surface_elevated">#2C2F36</color>
+    <color name="zyro_bottom_nav">#1F2124</color>
+    <color name="zyro_bottom_nav_border">#2E3136</color>
+    
+    <!-- Brave-Style Accents -->
+    <color name="zyro_orange">#FB542B</color>
+    <color name="zyro_purple">#4C54D2</color>
+    <color name="zyro_teal">#38D39F</color>
+    <color name="zyro_shield_active">#FB542B</color>
+    
+    <!-- Futuristic Cyberpunk Accents for SafeLink -->
+    <color name="cyber_cyan">#00F2FE</color>
+    <color name="cyber_blue">#4FACFE</color>
+    <color name="cyber_green">#00E676</color>
+    <color name="cyber_yellow">#F59E0B</color>
+    <color name="cyber_purple">#9B51E0</color>
+    <color name="cyber_card_bg">#12151B</color>
+    <color name="cyber_card_border">#202938</color>
+    <color name="cyber_glow">#3300F2FE</color>
+    <color name="cyber_ad_bg">#151922</color>
+    
+    <!-- Inputs & Text -->
+    <color name="zyro_url_bg">#2A2D32</color>
+    <color name="zyro_text_primary">#F4F5F6</color>
+    <color name="zyro_text_secondary">#9CA3AF</color>
+    <color name="zyro_progress">#FB542B</color>
+    
+    <!-- Dynamic Theme Color Slots -->
+    <color name="theme_window_bg">#18191C</color>
+    <color name="theme_surface_bg">#222428</color>
+    <color name="theme_card_bg">#2C2F36</color>
+    <color name="theme_bar_bg">#1F2124</color>
+    <color name="theme_url_bg">#2A2D32</color>
+    <color name="theme_text_primary">#F4F5F6</color>
+    <color name="theme_text_secondary">#9CA3AF</color>
+    <color name="theme_divider">#2E3136</color>
+
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="divider_color">#2D3139</color>
+
+    <!-- Warning / AdBlock Conflict Accents -->
+    <color name="cyber_warning_red">#FF4343</color>
+    <color name="cyber_warning_bg">#1D1214</color>
+    <color name="cyber_warning_border">#5C1E23</color>
+
+    <!-- Premium SafeLink Palette (clean light theme) -->
+    <color name="premium_bg">#F1F5F9</color>
+    <color name="premium_surface">#FFFFFF</color>
+    <color name="premium_card">#F8FAFB</color>
+    <color name="premium_blue">#2563EB</color>
+    <color name="premium_blue_dark">#1D4ED8</color>
+    <color name="premium_blue_light">#DBEAFE</color>
+    <color name="premium_green">#22C55E</color>
+    <color name="premium_green_light">#F0FDF4</color>
+    <color name="premium_text_primary">#0F172A</color>
+    <color name="premium_text_secondary">#64748B</color>
+    <color name="premium_text_muted">#94A3B8</color>
+    <color name="premium_divider">#E2E8F0</color>
+    <color name="premium_border">#E8EEF4</color>
+    <color name="premium_status_bg">#EAF9F2</color>
+    <color name="premium_status_text">#15803D</color>
+</resources>

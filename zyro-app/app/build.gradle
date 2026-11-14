@@ -1,0 +1,78 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+}
+
+if (file("google-services.json").exists()) {
+    apply plugin: 'com.google.gms.google-services'
+}
+
+android {
+    namespace 'com.zyro.browser'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId "com.zyro.browser"
+        minSdk 24
+        targetSdk 34
+        versionCode 1
+        versionName "1.0.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables {
+            useSupportLibrary = true
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            applicationIdSuffix ""
+            debuggable true
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+    kotlinOptions {
+        jvmTarget = '17'
+    }
+    buildFeatures {
+        viewBinding true
+    }
+}
+
+dependencies {
+    implementation 'androidx.core:core-ktx:1.12.0'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'com.google.android.material:material:1.11.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'androidx.webkit:webkit:1.10.0'
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
+
+    // Google Mobile Ads (AdMob)
+    implementation 'com.google.android.gms:play-services-ads:22.6.0'
+
+    // Meta Audience Network (Facebook Ads)
+    implementation('com.facebook.android:audience-network-sdk:6.18.0') {
+        exclude group: 'androidx.browser', module: 'browser'
+    }
+    implementation 'androidx.browser:browser:1.8.0'
+
+    // AppLovin MAX SDK
+    implementation 'com.applovin:applovin-sdk:13.1.0'
+
+    // Firebase Platform BOM & Services
+    implementation platform('com.google.firebase:firebase-bom:32.8.0')
+    implementation 'com.google.firebase:firebase-analytics-ktx'
+    implementation 'com.google.firebase:firebase-messaging-ktx'
+    implementation 'com.google.firebase:firebase-firestore-ktx'
+
+    // Google Play Install Referrer (Deferred Deep Linking)
+    implementation 'com.android.installreferrer:installreferrer:2.2'
+}

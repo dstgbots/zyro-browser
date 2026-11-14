@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Premium Shield for SafeLink - inspired by security scanner apps -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="32dp"
+    android:height="32dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <path
+        android:fillColor="#1E3A8A"
+        android:pathData="M12,2L4,5.5v5.5C4,15.46 7.54,19.98 12,21c4.46,-1.02 8,-5.54 8,-10V5.5L12,2z" />
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M10,16.5L6.5,13l1.41,-1.41L10,13.67l6.09,-6.09L17.5,9L10,16.5z" />
+</vector>

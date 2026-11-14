@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/layout_fullscreen_loading_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#0A0E17">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="32dp">
+
+        <!-- Shield Icon with Glow -->
+        <FrameLayout
+            android:layout_width="72dp"
+            android:layout_height="72dp"
+            android:background="@drawable/bg_cyber_card"
+            android:padding="16dp">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_shield"
+                app:tint="@color/cyber_cyan" />
+        </FrameLayout>
+
+        <!-- Badge -->
+        <TextView
+            android:id="@+id/tv_fullscreen_loading_badge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="#151C2C"
+            android:fontFamily="monospace"
+            android:paddingStart="12dp"
+            android:paddingTop="5dp"
+            android:paddingEnd="12dp"
+            android:paddingBottom="5dp"
+            android:text="FULL-SCREEN SECURITY VERIFICATION"
+            android:textColor="@color/cyber_cyan"
+            android:textSize="11sp"
+            android:textStyle="bold" />
+
+        <!-- Title -->
+        <TextView
+            android:id="@+id/tv_fullscreen_loading_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:fontFamily="sans-serif-black"
+            android:gravity="center"
+            android:text="LOADING SPONSOR AD"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <!-- Subtitle -->
+        <TextView
+            android:id="@+id/tv_fullscreen_loading_subtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:text="Preparing immersive full-page verification..."
+            android:textColor="@color/zyro_text_secondary"
+            android:textSize="13sp" />
+
+        <!-- Cyber Spinner -->
+        <ProgressBar
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="28dp"
+            android:indeterminateTint="@color/cyber_cyan" />
+
+        <!-- Status / countdown hint -->
+        <TextView
+            android:id="@+id/tv_fullscreen_loading_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:fontFamily="monospace"
+            android:text="Connecting to verification network..."
+            android:textColor="@color/cyber_cyan"
+            android:textSize="11sp" />
+
+    </LinearLayout>
+
+</FrameLayout>

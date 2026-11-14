@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/custom_ad_root"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="6dp">
+
+    <!-- Top Badge / Category -->
+    <TextView
+        android:id="@+id/custom_ad_badge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#1E293B"
+        android:fontFamily="monospace"
+        android:paddingStart="6dp"
+        android:paddingTop="2dp"
+        android:paddingEnd="6dp"
+        android:paddingBottom="2dp"
+        android:text="SPONSORED PARTNER"
+        android:textColor="@color/cyber_cyan"
+        android:textSize="9sp"
+        android:textStyle="bold" />
+
+    <!-- Headline -->
+    <TextView
+        android:id="@+id/custom_ad_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:ellipsize="end"
+        android:fontFamily="sans-serif-medium"
+        android:maxLines="1"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        android:textStyle="bold" />
+
+    <!-- Description -->
+    <TextView
+        android:id="@+id/custom_ad_desc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:ellipsize="end"
+        android:fontFamily="sans-serif"
+        android:maxLines="2"
+        android:textColor="@color/zyro_text_secondary"
+        android:textSize="12sp" />
+
+    <!-- CTA Button -->
+    <TextView
+        android:id="@+id/custom_ad_cta"
+        android:layout_width="match_parent"
+        android:layout_height="38dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/bg_cyber_button"
+        android:gravity="center"
+        android:fontFamily="sans-serif-bold"
+        android:text="EXPLORE DEAL →"
+        android:textColor="@color/white"
+        android:textSize="12sp" />
+</LinearLayout>

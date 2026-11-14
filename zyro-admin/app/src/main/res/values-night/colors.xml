@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Backgrounds & Surfaces (Dark Theme - Midnight Slate) -->
+    <color name="admin_bg">#0B0F19</color>              <!-- Deep Midnight Slate background -->
+    <color name="admin_surface">#111827</color>         <!-- Gray-900: Appbar, Drawer -->
+    <color name="admin_card">#161F30</color>            <!-- Elevated Deep Navy Slate Card -->
+    <color name="admin_card_border">#22314E</color>     <!-- Subtle 1px card outline -->
+    <color name="admin_input_bg">#0F1626</color>        <!-- Recessed input background -->
+    <color name="admin_divider">#1E293B</color>         <!-- Slate-800 divider -->
+    <color name="admin_chip_bg">#1E293B</color>
+    <color name="admin_icon_container">#1E1B4B</color>  <!-- Deep Indigo container -->
+
+    <!-- Professional Brand Colors (Dark Mode Vibrant Indigo & Sky) -->
+    <color name="admin_primary">#6366F1</color>         <!-- Indigo-500: Vibrant & sharp on dark -->
+    <color name="admin_primary_variant">#4F46E5</color> <!-- Indigo-600 -->
+    <color name="admin_primary_soft">#1E1B4B</color>     <!-- Deep Indigo-950 badge container -->
+    <color name="zyro_primary">#6366F1</color>
+    <color name="admin_accent">#38BDF8</color>          <!-- Sky-400: Electric sky accent -->
+    <color name="admin_accent_soft">#082F49</color>     <!-- Sky-950 -->
+
+    <!-- Status Indicators -->
+    <color name="admin_green">#10B981</color>           <!-- Emerald-500 -->
+    <color name="admin_green_soft">#064E3B</color>      <!-- Emerald-950 -->
+    <color name="admin_red">#F87171</color>             <!-- Red-400 -->
+    <color name="admin_red_soft">#450A0A</color>
+    <color name="admin_amber">#FBBF24</color>           <!-- Amber-400 -->
+    <color name="admin_amber_soft">#451A03</color>
+
+    <!-- Typography (Dark Theme) -->
+    <color name="admin_text_primary">#F8FAFC</color>     <!-- Slate-50: Crisp white text -->
+    <color name="admin_text_secondary">#94A3B8</color>   <!-- Slate-400: Legible secondary -->
+    <color name="admin_text_muted">#64748B</color>       <!-- Slate-500: Subdued captions -->
+
+    <!-- Base Constants -->
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+</resources>

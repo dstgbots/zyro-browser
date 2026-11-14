@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="12dp"
+    android:background="@drawable/bg_admin_card"
+    android:orientation="vertical"
+    android:padding="14dp">
+
+    <!-- Top Row: Topic Badge + Timestamp + Status -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_item_topic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_badge_primary"
+            android:fontFamily="monospace"
+            android:paddingStart="8dp"
+            android:paddingTop="2dp"
+            android:paddingEnd="8dp"
+            android:paddingBottom="2dp"
+            android:text="ALL USERS"
+            android:textColor="@color/admin_primary"
+            android:textSize="10sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_item_priority"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:background="@drawable/bg_badge_green"
+            android:fontFamily="monospace"
+            android:paddingStart="6dp"
+            android:paddingTop="2dp"
+            android:paddingEnd="6dp"
+            android:paddingBottom="2dp"
+            android:text="HIGH"
+            android:textColor="@color/admin_green"
+            android:textSize="9sp" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/tv_item_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="monospace"
+            android:text="Just now"
+            android:textColor="@color/admin_text_secondary"
+            android:textSize="11sp" />
+    </LinearLayout>
+
+    <!-- Notification Title -->
+    <TextView
+        android:id="@+id/tv_item_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="sans-serif-black"
+        android:text="Update Available"
+        android:textColor="@color/admin_text_primary"
+        android:textSize="14sp" />
+
+    <!-- Notification Body -->
+    <TextView
+        android:id="@+id/tv_item_body"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:lineSpacingExtra="2dp"
+        android:text="Check out the newest cyber privacy features."
+        android:textColor="@color/admin_text_secondary"
+        android:textSize="12sp" />
+
+    <!-- Link / Image info if available -->
+    <TextView
+        android:id="@+id/tv_item_target_url"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:ellipsize="end"
+        android:fontFamily="monospace"
+        android:maxLines="1"
+        android:text="Target: https://example.com"
+        android:textColor="@color/admin_accent"
+        android:textSize="11sp"
+        android:visibility="gone" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="8dp"
+        android:background="@color/admin_divider" />
+
+    <!-- Action Buttons: Resend & Delete -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="end|center_vertical"
+        android:orientation="horizontal">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_item_resend"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:text="RESEND"
+            android:textColor="@color/admin_primary"
+            android:textSize="11sp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_item_delete"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:layout_marginStart="6dp"
+            android:text="DELETE"
+            android:textColor="#EF4444"
+            android:textSize="11sp" />
+    </LinearLayout>
+
+</LinearLayout>

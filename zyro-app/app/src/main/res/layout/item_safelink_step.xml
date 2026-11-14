@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingTop="4dp"
+    android:paddingBottom="4dp">
+
+    <!-- Step Row -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp">
+
+        <!-- Left: Step Icon -->
+        <FrameLayout
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginEnd="12dp">
+
+            <!-- Pending state circle (default visible) -->
+            <ImageView
+                android:id="@+id/iv_step_icon_bg"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:background="@drawable/bg_step_icon_pending" />
+
+            <!-- Check icon (done state, hidden by default) -->
+            <ImageView
+                android:id="@+id/iv_step_check"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_check_circle_prem"
+                android:visibility="gone" />
+
+            <!-- Spinner (active state, hidden by default) -->
+            <ProgressBar
+                android:id="@+id/pb_step_spinner"
+                style="?android:attr/progressBarStyleSmall"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center"
+                android:indeterminateTint="#2563EB"
+                android:visibility="gone" />
+
+            <!-- Step number text (pending state) -->
+            <TextView
+                android:id="@+id/tv_step_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="sans-serif-bold"
+                android:text="1"
+                android:textColor="#94A3B8"
+                android:textSize="13sp" />
+
+        </FrameLayout>
+
+        <!-- Middle: Title + Subtitle -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_step_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-medium"
+                android:text="DNS &amp; ICANN Authority"
+                android:textColor="#1E293B"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/tv_step_subtitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:fontFamily="sans-serif"
+                android:text="Legitimate registrar &amp; DNSSEC validated"
+                android:textColor="#94A3B8"
+                android:textSize="12sp" />
+
+        </LinearLayout>
+
+        <!-- Right: Badge -->
+        <TextView
+            android:id="@+id/tv_step_badge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:fontFamily="sans-serif-medium"
+            android:text="Pending"
+            android:textColor="#94A3B8"
+            android:textSize="12sp" />
+
+    </LinearLayout>
+
+    <!-- Progress Bar (thin, below the row) -->
+    <ProgressBar
+        android:id="@+id/pb_step"
+        style="@android:style/Widget.ProgressBar.Horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="4dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginBottom="4dp"
+        android:max="100"
+        android:progress="0"
+        android:progressDrawable="@drawable/bg_premium_progress"
+        android:visibility="invisible" />
+
+    <!-- Divider -->
+    <View
+        android:id="@+id/step_divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginStart="48dp"
+        android:background="#F1F5F9" />
+
+</LinearLayout>

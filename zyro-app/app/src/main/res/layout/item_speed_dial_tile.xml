@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/tile_root"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?attr/selectableItemBackgroundBorderless"
+    android:clickable="true"
+    android:focusable="true"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:paddingStart="4dp"
+    android:paddingTop="6dp"
+    android:paddingEnd="4dp"
+    android:paddingBottom="8dp">
+
+    <FrameLayout
+        android:id="@+id/tile_frame"
+        android:layout_width="54dp"
+        android:layout_height="54dp"
+        android:background="@drawable/bg_speed_dial_tile"
+        android:elevation="2dp">
+
+        <TextView
+            android:id="@+id/tv_tile_badge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="sans-serif-black"
+            android:letterSpacing="0.02"
+            android:text="G"
+            android:textColor="@color/white"
+            android:textSize="17sp" />
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/tv_tile_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:ellipsize="end"
+        android:fontFamily="sans-serif-medium"
+        android:gravity="center"
+        android:maxLines="1"
+        android:text="Google"
+        android:textColor="@color/zyro_text_primary"
+        android:textSize="11.5sp" />
+</LinearLayout>

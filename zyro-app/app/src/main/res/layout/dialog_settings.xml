@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/settings_dialog_root"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_bottom_sheet"
+    android:orientation="vertical"
+    android:paddingStart="20dp"
+    android:paddingTop="16dp"
+    android:paddingEnd="20dp"
+    android:paddingBottom="28dp">
+
+    <!-- Drag Handle -->
+    <View
+        android:layout_width="40dp"
+        android:layout_height="4dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/bg_url_bar" />
+
+    <TextView
+        android:id="@+id/tv_settings_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="sans-serif-black"
+        android:text="Settings"
+        android:textColor="@color/zyro_orange"
+        android:textSize="20sp" />
+
+    <!-- Theme Section Header -->
+    <TextView
+        android:id="@+id/tv_theme_section"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="Appearance &amp; Theme"
+        android:textColor="@color/theme_text_secondary"
+        android:textSize="13sp" />
+
+    <RadioGroup
+        android:id="@+id/rg_theme"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:orientation="vertical">
+
+        <!-- Dark Theme Option -->
+        <RadioButton
+            android:id="@+id/rb_theme_dark"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:buttonTint="@color/zyro_orange"
+            android:checked="true"
+            android:text="Dark Theme (Brave Dark)"
+            android:textColor="@color/theme_text_primary"
+            android:textSize="15sp" />
+
+        <!-- White / Light Theme Option -->
+        <RadioButton
+            android:id="@+id/rb_theme_light"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:buttonTint="@color/zyro_orange"
+            android:text="White Theme (Clean Light)"
+            android:textColor="@color/theme_text_primary"
+            android:textSize="15sp" />
+    </RadioGroup>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="12dp"
+        android:background="@color/divider_color" />
+
+    <!-- Privacy Shields Quick Info -->
+    <TextView
+        android:id="@+id/tv_shields_section"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-medium"
+        android:text="Privacy &amp; Security"
+        android:textColor="@color/theme_text_secondary"
+        android:textSize="13sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/ic_shield" />
+
+        <TextView
+            android:id="@+id/tv_shields_label"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="14dp"
+            android:layout_weight="1"
+            android:text="Zyro Shields Protection"
+            android:textColor="@color/theme_text_primary"
+            android:textSize="14sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-medium"
+            android:text="ENABLED"
+            android:textColor="@color/zyro_teal"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+</LinearLayout>

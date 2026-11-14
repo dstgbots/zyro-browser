@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:id="@id/safelink_screen_root" android:background="#F8FAFC" android:paddingTop="18.0dip" android:paddingBottom="18.0dip" android:focusable="true" android:clickable="true" android:layout_width="fill_parent" android:layout_height="fill_parent" android:paddingStart="16.0dip" android:paddingEnd="16.0dip"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    
+    <!-- Top Header Bar -->
+    <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <ImageButton android:id="@id/btn_close_safelink" android:background="@drawable/bg_cyber_card" android:layout_width="38.0dip" android:layout_height="38.0dip" android:src="@drawable/ic_close" android:contentDescription="Close" android:padding="8.0dip" app:tint="#64748B" />
+        
+        <LinearLayout android:gravity="center" android:orientation="horizontal" android:layout_width="0.0dip" android:layout_height="36.0dip" android:layout_weight="1.0" android:layout_marginStart="10.0dip" android:layout_marginEnd="10.0dip">
+            <TextView android:textSize="12.0sp" android:textColor="#047857" android:id="@id/tv_threat_level" android:background="@drawable/bg_green_pill" android:paddingTop="6.0dip" android:paddingBottom="6.0dip" android:paddingStart="14.0dip" android:paddingEnd="14.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="● Defense Shield Active" android:fontFamily="sans-serif-bold" />
+        </LinearLayout>
+        
+        <FrameLayout android:background="@drawable/bg_cyber_card" android:layout_width="38.0dip" android:layout_height="38.0dip">
+            <ImageView android:layout_gravity="center" android:layout_width="18.0dip" android:layout_height="18.0dip" android:src="@drawable/ic_shield" app:tint="#2563EB" />
+        </FrameLayout>
+    </LinearLayout>
+
+    <ScrollView android:scrollbars="none" android:layout_width="fill_parent" android:layout_height="0.0dip" android:fillViewport="true" android:layout_weight="1.0">
+        <LinearLayout android:orientation="vertical" android:paddingTop="12.0dip" android:paddingBottom="12.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content">
+            
+            <!-- Hero Radar / Concentric Rings Shield Centerpiece -->
+            <FrameLayout android:tag="radar_container" android:layout_gravity="center_horizontal" android:background="@drawable/bg_radar_circle" android:layout_width="120.0dip" android:layout_height="120.0dip" android:layout_marginTop="6.0dip" android:layout_marginBottom="10.0dip">
+                <ImageView android:layout_gravity="center" android:id="@id/iv_radar_shield" android:layout_width="30.0dip" android:layout_height="30.0dip" android:src="@drawable/ic_shield" app:tint="#FFFFFF" />
+            </FrameLayout>
+
+            <!-- Headline & Subtitle -->
+            <TextView android:textSize="20.0sp" android:textColor="#0F172A" android:gravity="center" android:layout_gravity="center_horizontal" android:id="@id/tv_safelink_headline" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Link Scanner" android:fontFamily="sans-serif-black" />
+            <TextView android:textSize="12.5sp" android:textColor="#64748B" android:gravity="center" android:layout_gravity="center_horizontal" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="4.0dip" android:layout_marginBottom="10.0dip" android:text="Scan a link for safety — unlock the result free with a rewarded ad." android:fontFamily="sans-serif" />
+
+            <ProgressBar android:id="@id/pb_safelink_global" android:layout_width="22.0dip" android:layout_height="22.0dip" android:layout_gravity="center_horizontal" android:layout_marginBottom="10.0dip" android:indeterminateTint="#FB542B" style="?android:progressBarStyleSmall" />
+
+            <!-- Target Destination Card -->
+            <LinearLayout android:orientation="vertical" android:background="@drawable/bg_cyber_card" android:padding="14.0dip" android:elevation="2.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="8.0dip">
+                    <TextView android:textSize="11.0sp" android:textColor="#64748B" android:layout_width="0.0dip" android:layout_height="wrap_content" android:text="TARGET DESTINATION" android:layout_weight="1.0" android:fontFamily="sans-serif-bold" android:letterSpacing="0.05" />
+                    <TextView android:textSize="11.0sp" android:textColor="#047857" android:id="@id/tv_ping" android:background="@drawable/bg_green_pill" android:paddingTop="3.0dip" android:paddingBottom="3.0dip" android:paddingStart="8.0dip" android:paddingEnd="8.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="● OFFICIAL &amp; AUTHENTIC" android:fontFamily="sans-serif-bold" />
+                </LinearLayout>
+
+                <LinearLayout android:orientation="vertical" android:background="@drawable/bg_url_box" android:padding="12.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                    <EditText android:textSize="15.0sp" android:textColor="#0F172A" android:textColorHint="#94A3B8" android:ellipsize="end" android:id="@id/tv_target_url" android:layout_width="fill_parent" android:layout_height="wrap_content" android:background="@null" android:padding="0.0dip" android:hint="Enter or paste URL..." android:singleLine="true" android:maxLines="1" android:inputType="textUri" android:imeOptions="actionGo" android:fontFamily="sans-serif-bold" />
+                    <TextView android:textSize="11.0sp" android:textColor="#94A3B8" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="3.0dip" android:text="Host: edge.cloudflare.net • TLS 1.3 Validated" android:fontFamily="sans-serif" />
+                </LinearLayout>
+
+                <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="10.0dip">
+                    <TextView android:textSize="11.0sp" android:textColor="#64748B" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_weight="1.0" android:text="📅 Domain Age: 8+ Yrs" android:fontFamily="sans-serif" />
+                    <TextView android:textSize="11.0sp" android:textColor="#64748B" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="🌐 Origin: Global CDN" android:fontFamily="sans-serif" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Diagnostic Telemetry / Inspection Pipeline Card -->
+            <LinearLayout android:orientation="vertical" android:id="@id/safelink_steps_card" android:background="@drawable/bg_cyber_card" android:padding="14.0dip" android:elevation="2.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="12.0dip">
+                <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="8.0dip">
+                    <TextView android:textSize="12.0sp" android:textColor="#0F172A" android:layout_width="0.0dip" android:layout_height="wrap_content" android:text="SECURITY PIPELINE CHECKS" android:layout_weight="1.0" android:fontFamily="sans-serif-bold" android:letterSpacing="0.05" />
+                    <TextView android:textSize="11.0sp" android:textColor="#047857" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="4 OF 4 CHECKS" android:fontFamily="sans-serif-bold" />
+                </LinearLayout>
+
+                <LinearLayout android:orientation="vertical" android:id="@id/safelink_steps_container" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <!-- Middle Banner Ad Container -->
+            <LinearLayout android:orientation="vertical" android:id="@id/custom_ad_root" android:background="@drawable/bg_cyber_card" android:padding="12.0dip" android:elevation="2.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="12.0dip">
+                <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="8.0dip">
+                    <TextView android:textSize="11.0sp" android:textColor="#64748B" android:id="@id/ad_headline" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_weight="1.0" android:text="" android:fontFamily="sans-serif-bold" android:letterSpacing="0.04" />
+                    <TextView android:textSize="10.0sp" android:textColor="#FFFFFF" android:id="@id/custom_ad_badge" android:background="@drawable/bg_green_pill" android:paddingTop="2.0dip" android:paddingBottom="2.0dip" android:paddingStart="7.0dip" android:paddingEnd="7.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Ad" android:fontFamily="sans-serif-bold" android:layout_marginEnd="6.0dip" />
+                    <TextView android:textSize="12.0sp" android:textColor="#94A3B8" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="ⓘ" android:fontFamily="sans-serif" />
+                </LinearLayout>
+
+                <FrameLayout android:id="@id/admob_view_slot" android:layout_gravity="center_horizontal" android:layout_width="wrap_content" android:layout_height="wrap_content" android:minWidth="300.0dip" android:minHeight="250.0dip" />
+            </LinearLayout>
+
+            <!-- ABOUT THIS TOOL Educational & Policy Content Card -->
+            <LinearLayout android:orientation="vertical" android:background="@drawable/bg_cyber_card" android:padding="16.0dip" android:elevation="2.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="12.0dip" android:layout_marginBottom="16.0dip">
+                <TextView android:textSize="11.0sp" android:textColor="#94A3B8" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="ABOUT THIS TOOL" android:fontFamily="sans-serif-bold" android:letterSpacing="0.06" />
+                <TextView android:textSize="18.0sp" android:textColor="#0F172A" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="4.0dip" android:layout_marginBottom="12.0dip" android:text="Link Scanner" android:fontFamily="sans-serif-black" />
+
+                <TextView android:textSize="13.0sp" android:textColor="#FB542B" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="✦ What it does" android:fontFamily="sans-serif-bold" />
+                <TextView android:textSize="12.5sp" android:textColor="#64748B" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="3.0dip" android:layout_marginBottom="12.0dip" android:lineSpacingExtra="3.0dip" android:text="✓ Inspects a link before you open it — follows it, checks the domain, certificate and reputation, and shows where it really ends up." android:fontFamily="sans-serif" />
+
+                <TextView android:textSize="13.0sp" android:textColor="#FB542B" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="✦ How to use" android:fontFamily="sans-serif-bold" />
+                <TextView android:textSize="12.5sp" android:textColor="#64748B" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="3.0dip" android:layout_marginBottom="12.0dip" android:lineSpacingExtra="3.0dip" android:text="✓ Paste or type the link (e.g. https://bit.ly/...)\n✓ Tap start to verify each security layer\n✓ Watch a short rewarded video ad to run the security check" android:fontFamily="sans-serif" />
+
+                <TextView android:textSize="13.0sp" android:textColor="#FB542B" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="✦ Security Features" android:fontFamily="sans-serif-bold" />
+                <TextView android:textSize="12.5sp" android:textColor="#64748B" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="3.0dip" android:layout_marginBottom="12.0dip" android:lineSpacingExtra="3.0dip" android:text="✓ Real-time SSL / TLS Certificate Validation\n✓ Anti-Phishing &amp; Domain Age Verification\n✓ DNS Redirection &amp; Cloaking Detection\n✓ Malware Signature &amp; Blacklist Cross-check" android:fontFamily="sans-serif" />
+
+                <TextView android:textSize="13.0sp" android:textColor="#FB542B" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="✦ Good to know" android:fontFamily="sans-serif-bold" />
+                <TextView android:textSize="12.5sp" android:textColor="#64748B" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="3.0dip" android:lineSpacingExtra="3.0dip" android:text="✓ Great for links from SMS, email or social media where you can't see the true destination.\n✓ 100% private sandbox inspection — zero user telemetry logged." android:fontFamily="sans-serif" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- Bottom Proceed Button -->
+    <com.google.android.material.button.MaterialButton android:enabled="false" android:textSize="15.0sp" android:textColor="#FFFFFF" android:id="@id/btn_safelink_continue" android:background="@drawable/bg_btn_safelink" android:elevation="4.0dip" android:layout_width="fill_parent" android:layout_height="54.0dip" android:text="Verifying Link Security..." android:textAllCaps="false" android:fontFamily="sans-serif-bold" app:backgroundTint="@null" />
+    
+    <TextView android:textSize="11.0sp" android:textColor="#94A3B8" android:gravity="center" android:layout_gravity="center_horizontal" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="8.0dip" android:text="🔒 Zero telemetry logged • Handoff to default browser" android:fontFamily="sans-serif" />
+
+</LinearLayout>

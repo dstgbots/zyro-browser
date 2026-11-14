@@ -1,0 +1,13 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <!-- AppLovin MAX Stylized 'A' Diamond Shield Mark -->
+    <path
+        android:fillColor="#05CD99"
+        android:pathData="M12,2L3,7.5v9L12,22l9,-5.5v-9L12,2z" />
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M12,6.5L6.5,16h2.8l1.3,-2.6h2.8l1.3,2.6h2.8L12,6.5zM11.4,11.2l0.6,-1.4l0.6,1.4h-1.2z" />
+</vector>

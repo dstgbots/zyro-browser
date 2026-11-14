@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout_adblock_warning_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#B807090E"
+    android:clickable="true"
+    android:elevation="60dp"
+    android:focusable="true">
+
+    <!-- Centered Non-Closable Modal Popup Card -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card_adblock_popup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="22dp"
+        android:layout_marginEnd="22dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="32dp"
+        app:cardBackgroundColor="#16181F"
+        app:cardCornerRadius="24dp"
+        app:cardElevation="24dp"
+        app:strokeColor="@color/cyber_warning_border"
+        app:strokeWidth="1.5dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:paddingStart="22dp"
+            android:paddingTop="26dp"
+            android:paddingEnd="22dp"
+            android:paddingBottom="24dp">
+
+            <!-- Glowing Warning Icon Circle -->
+            <FrameLayout
+                android:layout_width="72dp"
+                android:layout_height="72dp"
+                android:background="@drawable/bg_radar_circle">
+
+                <ImageView
+                    android:id="@+id/iv_adblock_warning_icon"
+                    android:layout_width="38dp"
+                    android:layout_height="38dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_warning"
+                    app:tint="@color/cyber_warning_red" />
+            </FrameLayout>
+
+            <!-- Alert Pill Badge -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:background="@drawable/bg_tab_box"
+                android:backgroundTint="@color/cyber_warning_border"
+                android:fontFamily="sans-serif-medium"
+                android:letterSpacing="0.08"
+                android:paddingStart="10dp"
+                android:paddingTop="3dp"
+                android:paddingEnd="10dp"
+                android:paddingBottom="3dp"
+                android:text="⚠️ SYSTEM CONFLICT DETECTED"
+                android:textColor="@color/cyber_warning_red"
+                android:textSize="10sp"
+                android:textStyle="bold" />
+
+            <!-- Title -->
+            <TextView
+                android:id="@+id/tv_adblock_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="sans-serif-bold"
+                android:gravity="center"
+                android:text="Turn Off External Ad Blocker"
+                android:textColor="@color/zyro_text_primary"
+                android:textSize="19sp" />
+
+            <!-- Subtitle -->
+            <TextView
+                android:id="@+id/tv_adblock_subtitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="sans-serif"
+                android:gravity="center"
+                android:lineSpacingExtra="2dp"
+                android:text="Zyro Browser already includes built-in Zyro Shields ad protection. External DNS ad blockers clash with the browser and disrupt security checks."
+                android:textColor="@color/zyro_text_secondary"
+                android:textSize="12sp" />
+
+            <!-- Detection Details Card -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/bg_adblock_card"
+                android:orientation="vertical"
+                android:padding="14dp">
+
+                <!-- Detected Item Highlight -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-medium"
+                        android:text="Active Blocker: "
+                        android:textColor="@color/zyro_text_secondary"
+                        android:textSize="11sp" />
+
+                    <TextView
+                        android:id="@+id/tv_detected_dns_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="middle"
+                        android:fontFamily="monospace"
+                        android:singleLine="true"
+                        android:text="dns.adguard.com"
+                        android:textColor="@color/cyber_warning_red"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@color/cyber_warning_border" />
+
+                <!-- Steps to disable -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-bold"
+                    android:text="Quick Fix:"
+                    android:textColor="@color/zyro_text_primary"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:fontFamily="sans-serif"
+                    android:lineSpacingExtra="2dp"
+                    android:text="1. Tap OPEN DNS SETTINGS\n2. Tap 'Private DNS' and select Off or Automatic\n3. Return here to continue browsing"
+                    android:textColor="@color/zyro_text_secondary"
+                    android:textSize="11sp" />
+            </LinearLayout>
+
+            <!-- Progress Loader while re-checking -->
+            <ProgressBar
+                android:id="@+id/pb_checking_adblock"
+                style="?android:attr/progressBarStyleSmall"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginTop="12dp"
+                android:indeterminateTint="@color/cyber_cyan"
+                android:visibility="gone" />
+
+            <!-- Primary Action: Open DNS Settings -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_open_dns_settings"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginTop="16dp"
+                android:fontFamily="sans-serif-bold"
+                android:letterSpacing="0.04"
+                android:text="OPEN DNS SETTINGS"
+                android:textColor="@color/white"
+                android:textSize="13sp"
+                app:backgroundTint="@color/zyro_orange"
+                app:cornerRadius="12dp"
+                app:icon="@drawable/ic_settings"
+                app:iconGravity="textStart"
+                app:iconPadding="8dp"
+                app:iconTint="@color/white" />
+
+            <!-- Secondary Action: Check Again -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_check_adblock_again"
+                style="@style/Widget.Material3.Button.OutlinedButton"
+                android:layout_width="match_parent"
+                android:layout_height="44dp"
+                android:layout_marginTop="8dp"
+                android:fontFamily="sans-serif-bold"
+                android:letterSpacing="0.04"
+                app:strokeColor="@color/cyber_card_border"
+                app:strokeWidth="1dp"
+                android:text="CHECK AGAIN"
+                android:textColor="@color/cyber_cyan"
+                android:textSize="12sp"
+                app:cornerRadius="12dp"
+                app:icon="@drawable/ic_refresh"
+                app:iconGravity="textStart"
+                app:iconPadding="8dp"
+                app:iconTint="@color/cyber_cyan" />
+
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+</FrameLayout>

@@ -1,11 +1,22 @@
 .DS_Store
 
-# Build directories
+# Build directories and caches
 chromium/
 depot_tools/
 out/
 build/
 titanium/
+.gradle/
+**/.gradle/
+**/build/
+.kotlin/
+**/.kotlin/
+apktool_framework/
+corretto-17/
+corretto-17.zip
+gradle-dist/
+android-zyro-browser-main/
+apk_unpacked/
 
 # Extensions built output
 extensions/dist/
@@ -23,8 +34,21 @@ google-services.json
 *.iml
 .vscode/
 
-# Build artifacts
+# Build artifacts and tools
 *.aab
 *.apk
 *.dex
 *.class
+*.idsig
+*.jar
+
+# Temporary screenshots and dumps
+scratch/*.xml
+*.png
+!AppLogo.png
+!Zyro_white_logo.png
+!Zyro_grey_logo.png
+!fastlane/**/*.png
+!res/**/*.png
+!zyro-app/**/*.png
+!zyro-admin/**/*.png

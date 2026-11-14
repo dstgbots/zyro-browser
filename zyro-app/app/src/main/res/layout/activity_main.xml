@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/root_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/zyro_bg">
+
+    <!-- Top Brave-style Compact Omnibox Bar -->
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/zyro_bg"
+        app:elevation="0dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp">
+
+            <!-- Rounded Omnibox Container -->
+            <LinearLayout
+                android:id="@+id/url_container"
+                android:layout_width="0dp"
+                android:layout_height="42dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_url_bar"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingStart="10dp"
+                android:paddingEnd="8dp">
+
+                <!-- Zyro Shields Protection Button (Brave style) -->
+                <ImageView
+                    android:id="@+id/btn_shields"
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="Zyro Shields"
+                    android:src="@drawable/ic_shield" />
+
+                <ImageView
+                    android:id="@+id/ssl_indicator"
+                    android:layout_width="14dp"
+                    android:layout_height="14dp"
+                    android:layout_marginStart="8dp"
+                    android:contentDescription="Security"
+                    android:src="@drawable/ic_lock"
+                    app:tint="@color/zyro_text_secondary" />
+
+                <EditText
+                    android:id="@+id/et_url"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:hint="Search or type web address"
+                    android:imeOptions="actionGo"
+                    android:importantForAutofill="no"
+                    android:inputType="textUri"
+                    android:maxLines="1"
+                    android:textColor="@color/zyro_text_primary"
+                    android:textColorHint="@color/zyro_text_secondary"
+                    android:textSize="14sp" />
+
+                <ImageButton
+                    android:id="@+id/btn_voice_search_top"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="Voice Search"
+                    android:padding="6dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_mic" />
+
+                <ImageButton
+                    android:id="@+id/btn_clear_url"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="Clear"
+                    android:src="@drawable/ic_close"
+                    android:visibility="gone"
+                    app:tint="@color/zyro_text_secondary" />
+
+                <ImageButton
+                    android:id="@+id/btn_refresh"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="@string/refresh"
+                    android:src="@drawable/ic_refresh"
+                    app:tint="@color/zyro_text_secondary" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Loading Progress Bar -->
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:indeterminate="false"
+            android:max="100"
+            android:progressDrawable="@color/zyro_progress"
+            android:visibility="gone" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/divider_color" />
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <!-- Main Content Area: WebView & NTP Dashboard -->
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_refresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="56dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <FrameLayout
+            android:id="@+id/web_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <include
+                android:id="@+id/ntp_view"
+                layout="@layout/layout_new_tab_page"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="visible" />
+
+            <WebView
+                android:id="@+id/web_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone" />
+        </FrameLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    <!-- Brave-Style Bottom Navigation Toolbar -->
+    <LinearLayout
+        android:id="@+id/bottom_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_gravity="bottom"
+        android:background="@color/zyro_bottom_nav"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <!-- Home / NTP -->
+        <ImageButton
+            android:id="@+id/nav_home"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Home"
+            android:src="@drawable/ic_home"
+            app:tint="@color/zyro_text_primary" />
+
+        <!-- Bookmarks / Favorites -->
+        <ImageButton
+            android:id="@+id/nav_bookmarks"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Bookmarks"
+            android:src="@drawable/ic_bookmark"
+            app:tint="@color/zyro_text_secondary" />
+
+        <!-- Search Icon (Focuses omnibox from bottom) -->
+        <ImageButton
+            android:id="@+id/nav_search"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Search"
+            android:src="@drawable/ic_search"
+            app:tint="@color/zyro_text_primary" />
+
+        <!-- Square Tab Switcher Counter [ 1 ] (Brave style) -->
+        <FrameLayout
+            android:id="@+id/nav_tabs"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:focusable="true">
+
+            <FrameLayout
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="center"
+                android:background="@drawable/bg_tab_box">
+
+                <TextView
+                    android:id="@+id/tv_bottom_tab_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="1"
+                    android:textColor="@color/zyro_text_primary"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+            </FrameLayout>
+        </FrameLayout>
+
+        <!-- Overflow Menu (3-dots) -->
+        <ImageButton
+            android:id="@+id/nav_menu"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Menu"
+            android:src="@drawable/ic_more_vert"
+            app:tint="@color/zyro_text_primary" />
+    </LinearLayout>
+
+    <!-- Fullscreen Video Container -->
+    <FrameLayout
+        android:id="@+id/custom_view_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/black"
+        android:visibility="gone" />
+
+    <!-- SafeLink Verification Full-Screen Overlay View -->
+    <include
+        android:id="@+id/safelink_view"
+        layout="@layout/layout_safelink_verification"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
+
+    <!-- Chrome / Brave Style Tab Switcher Full-Screen Overlay View -->
+    <include
+        android:id="@+id/tab_switcher_view"
+        layout="@layout/layout_tab_switcher"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
+
+    <!-- External AdBlocker / Private DNS Force Blocking Screen -->
+    <include
+        android:id="@+id/adblock_warning_view"
+        layout="@layout/layout_adblock_warning"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

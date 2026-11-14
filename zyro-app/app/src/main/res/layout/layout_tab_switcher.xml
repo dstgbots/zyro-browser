@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout_tab_switcher_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/zyro_bg"
+    android:clickable="true"
+    android:focusable="true"
+    android:orientation="vertical">
+
+    <!-- Chrome / Brave Style Tab Switcher Top Toolbar -->
+    <LinearLayout
+        android:id="@+id/switcher_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="@color/zyro_bg"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp">
+
+        <ImageButton
+            android:id="@+id/btn_switcher_back"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Back to Web"
+            android:padding="7dp"
+            android:src="@drawable/ic_arrow_back"
+            app:tint="@color/zyro_text_primary" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-bold"
+                android:text="Tabs"
+                android:textColor="@color/zyro_text_primary"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/tv_switcher_tab_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/bg_tab_box"
+                android:fontFamily="monospace"
+                android:paddingStart="7dp"
+                android:paddingTop="2dp"
+                android:paddingEnd="7dp"
+                android:paddingBottom="2dp"
+                android:text="1"
+                android:textColor="@color/cyber_cyan"
+                android:textSize="11sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <ImageButton
+            android:id="@+id/btn_switcher_new_tab_top"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="New Tab"
+            android:padding="7dp"
+            android:src="@drawable/ic_add"
+            app:tint="@color/zyro_text_primary" />
+
+        <ImageButton
+            android:id="@+id/btn_switcher_menu"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:layout_marginStart="4dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Tab Options"
+            android:padding="7dp"
+            android:src="@drawable/ic_more_vert"
+            app:tint="@color/zyro_text_secondary" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/divider_color" />
+
+    <!-- 2-Column Tabs Grid (Chrome/Brave style) -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_tabs_grid"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:clipToPadding="false"
+        android:paddingStart="8dp"
+        android:paddingTop="8dp"
+        android:paddingEnd="8dp"
+        android:paddingBottom="12dp"
+        android:scrollbars="vertical"
+        tools:listitem="@layout/item_browser_tab" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/divider_color" />
+
+    <!-- Bottom Action Pill Bar -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="58dp"
+        android:background="@color/zyro_bottom_nav"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="14dp"
+        android:paddingEnd="14dp">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_switcher_close_all"
+            style="@style/Widget.Material3.Button.TextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="38dp"
+            android:fontFamily="sans-serif-bold"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:text="CLOSE ALL"
+            android:textColor="@color/zyro_text_secondary"
+            android:textSize="11sp" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_switcher_new_tab"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:fontFamily="sans-serif-bold"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:paddingStart="18dp"
+            android:paddingEnd="18dp"
+            android:text="+ NEW TAB"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            app:backgroundTint="@color/zyro_orange"
+            app:cornerRadius="20dp" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_switcher_done"
+            style="@style/Widget.Material3.Button.TextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="38dp"
+            android:fontFamily="sans-serif-bold"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:text="DONE"
+            android:textColor="@color/cyber_cyan"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Backgrounds & Surfaces (Light Theme - Executive SaaS) -->
+    <color name="admin_bg">#F8FAFC</color>              <!-- Slate-50: Crisp, clean background -->
+    <color name="admin_surface">#FFFFFF</color>         <!-- Pure White: Appbar, Drawer, Panels -->
+    <color name="admin_card">#FFFFFF</color>            <!-- Pure White: Card container -->
+    <color name="admin_card_border">#E2E8F0</color>     <!-- Slate-200: Subtle, sleek 1px card border -->
+    <color name="admin_input_bg">#F1F5F9</color>        <!-- Slate-100: Soft modern input fill -->
+    <color name="admin_divider">#E2E8F0</color>         <!-- Slate-200: Elegant divider -->
+    <color name="admin_chip_bg">#EDF2F7</color>
+    <color name="admin_icon_container">#EEF2FF</color>  <!-- Soft Indigo container -->
+
+    <!-- Professional Brand Colors (Executive Indigo & Sky Blue - No harsh orange!) -->
+    <color name="admin_primary">#4F46E5</color>         <!-- Indigo-600: Premium, authoritative, modern -->
+    <color name="admin_primary_variant">#4338CA</color> <!-- Indigo-700 -->
+    <color name="admin_primary_soft">#EEF2FF</color>     <!-- Indigo-50: Badge & highlight background -->
+    <color name="zyro_primary">#4F46E5</color>
+    <color name="admin_accent">#0284C7</color>          <!-- Sky-600: Clean technical secondary accent -->
+    <color name="admin_accent_soft">#E0F2FE</color>     <!-- Sky-100 -->
+
+    <!-- Status Indicators -->
+    <color name="admin_green">#10B981</color>           <!-- Emerald-500: Active, Online -->
+    <color name="admin_green_soft">#ECFDF5</color>      <!-- Emerald-50 -->
+    <color name="admin_red">#EF4444</color>             <!-- Rose-500: Danger, Delete -->
+    <color name="admin_red_soft">#FEF2F2</color>        <!-- Rose-50 -->
+    <color name="admin_amber">#F59E0B</color>           <!-- Amber-500: Warning, Pending -->
+    <color name="admin_amber_soft">#FFFBEB</color>
+
+    <!-- Typography (Light Theme) -->
+    <color name="admin_text_primary">#0F172A</color>     <!-- Slate-900: Deep rich charcoal -->
+    <color name="admin_text_secondary">#475569</color>   <!-- Slate-600: Clear legible secondary -->
+    <color name="admin_text_muted">#94A3B8</color>       <!-- Slate-400: Placeholders & captions -->
+
+    <!-- Base Constants -->
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+</resources>
