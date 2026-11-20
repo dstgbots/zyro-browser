@@ -42,8 +42,8 @@ Set-Location "$staging\base"
 
 Write-Host "Running bundletool build-bundle..."
 $env:JAVA_HOME = "C:\android-Zyro-browser-main\corretto-17\jdk17.0.21_0"
-$outputAab = "c:\android-Zyro-browser-main\ZyroBrowser-v1.0.2.aab"
-$outputAab1 = "c:\android-Zyro-browser-main\ZyroBrowser-v1.0.1.aab"
+$outputAab = "c:\android-Zyro-browser-main\ZyroBrowser-v1.0.3.aab"
+$outputAab2 = "c:\android-Zyro-browser-main\ZyroBrowser-v1.0.2.aab"
 $rootAab = "c:\android-Zyro-browser-main\ZyroBrowser-v1.0.aab"
 
 & "$env:JAVA_HOME\bin\java.exe" -jar "c:\android-Zyro-browser-main\tools\bundletool.jar" build-bundle `
