@@ -625,7 +625,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.navSearch.setOnClickListener {
-            binding.appBar.visibility = View.VISIBLE
+            showDashboard(false)
             binding.etUrl.requestFocus()
             val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
             imm?.showSoftInput(binding.etUrl, InputMethodManager.SHOW_IMPLICIT)
@@ -648,7 +648,7 @@ class MainActivity : AppCompatActivity() {
         val ntp = binding.ntpView
 
         ntp.ntpSearchPill.setOnClickListener {
-            binding.appBar.visibility = View.VISIBLE
+            showDashboard(false)
             binding.etUrl.requestFocus()
             val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
             imm?.showSoftInput(binding.etUrl, InputMethodManager.SHOW_IMPLICIT)
@@ -779,6 +779,7 @@ class MainActivity : AppCompatActivity() {
     private fun showDashboard(show: Boolean) {
         if (show) {
             binding.ntpView.root.visibility = View.VISIBLE
+            binding.ntpView.root.bringToFront()
             binding.ntpView.newTabDashboard.post {
                 binding.ntpView.newTabDashboard.scrollTo(0, 0)
             }
@@ -859,6 +860,9 @@ class MainActivity : AppCompatActivity() {
         }
 
         // 2. Attach this tab's WebView and resume it
+        if (activeTab.url == "zyro://home" || activeTab.url.isEmpty() || activeTab.url == "about:blank") {
+            wv.visibility = View.GONE
+        }
         if (wv.parent == null) {
             binding.webContainer.addView(wv)
         } else if (wv.parent != binding.webContainer) {
@@ -877,7 +881,7 @@ class MainActivity : AppCompatActivity() {
         binding.tabSwitcherView.tvSwitcherTabCount.text = countStr
 
         // 5. Update Omnibox & view visibility
-        if (activeTab.url == "zyro://home" || activeTab.url.isEmpty()) {
+        if (activeTab.url == "zyro://home" || activeTab.url.isEmpty() || activeTab.url == "about:blank") {
             showDashboard(true)
             binding.etUrl.setText("")
         } else {
@@ -901,7 +905,7 @@ class MainActivity : AppCompatActivity() {
                     binding.progressBar.visibility = View.VISIBLE
                     binding.btnRefresh.setImageResource(R.drawable.ic_close)
                 }
-                if (!url.isNullOrEmpty()) activeTab.url = url
+                if (!url.isNullOrEmpty() && url != "about:blank") activeTab.url = url
                 if (favicon != null) activeTab.favicon = favicon
                 pageTrackersBlocked.set(0)
             },
@@ -914,7 +918,7 @@ class MainActivity : AppCompatActivity() {
                     binding.swipeRefresh.isRefreshing = false
                     binding.btnRefresh.setImageResource(R.drawable.ic_refresh)
                 }
-                if (!url.isNullOrEmpty()) activeTab.url = url
+                if (!url.isNullOrEmpty() && url != "about:blank") activeTab.url = url
                 // When in desktop mode, ensure desktop viewport tag is injected
                 if (activeTab.isDesktopMode) {
                     wv.evaluateJavascript(DESKTOP_VIEWPORT_SCRIPT, null)
