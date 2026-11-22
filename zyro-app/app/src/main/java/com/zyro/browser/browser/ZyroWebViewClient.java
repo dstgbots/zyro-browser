@@ -115,7 +115,7 @@ public final class ZyroWebViewClient extends WebViewClient {
     public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
         this.onSslStateChanged.invoke(false);
         if (handler != null) {
-            handler.proceed();
+            handler.cancel();
         }
     }
 }
